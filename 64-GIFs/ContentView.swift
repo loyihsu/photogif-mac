@@ -50,6 +50,10 @@ struct ContentView: View {
         }
     }
     
+    func clear() {
+        self.sources = []
+    }
+    
     var body: some View {
         VStack {
             ScrollView(.vertical) {
@@ -61,6 +65,7 @@ struct ContentView: View {
                             
                             Text(i.location.lastElement())
                             
+                            #warning("index out of range error")
                             TextField("seconds",
                                       text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
                             Text("seconds")
@@ -97,6 +102,9 @@ struct ContentView: View {
                 Button("Open Document") {
                     self.openDocument()
                     
+                }
+                Button("Clear") {
+                    self.clear()
                 }
             }
         }
