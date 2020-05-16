@@ -23,26 +23,29 @@ struct Source: Identifiable {
     var length: String
 }
 
+var inputCount = 0
+
 struct ContentView: View {
     @State var sources: [Source] = []
-    
-    func removeRows(at offsets: IndexSet) {
-        sources.remove(atOffsets: offsets)
-    }
     
     func openDocument() {
         let panel = NSOpenPanel()
         
+        panel.allowsMultipleSelection = true
+        
         let result = panel.runModal()
         if result == .OK {
-            if var str = panel.url?.absoluteString {
+            for url in panel.urls {
+                var str = url.absoluteString
                 str = str.components(separatedBy: "file://").joined()
                 
                 self.sources.append(Source.init(
-                    id: self.sources.count - 1,
+                    id: inputCount,
                     location: str,
                     length: "1")
                 )
+                
+                inputCount += 1
             }
         }
     }
@@ -54,22 +57,20 @@ struct ContentView: View {
                     ForEach(sources) { i in
                         HStack {
                             Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
-                               .frame(width: 32, height: 32)
+                                .frame(width: 32, height: 32)
                             
                             Text(i.location.lastElement())
                             
-                            TextField("seconds", text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
+                            TextField("seconds",
+                                      text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
                             Text("seconds")
                             
                             Button("Remove") {
-                                self.sources.remove(at: self.sources.firstIndex(where: {
-                                    $0.id == i.id
-                                })!)
+                                self.sources.remove(at: self.sources.firstIndex(where: { $0.id == i.id })!)
                             }
                         }
                         .frame(width: 480, height: 50)
                     }
-                    .onDelete(perform: removeRows)
                     // Drag & Drop
                 }
             }
@@ -82,9 +83,9 @@ struct ContentView: View {
                     
                     let success = generateGIFs(from: items.map {
                         NSImage(contentsOfFile: $0.location)!
-                    }, delays: items.map { Double($0.length)! },
-                       docDirPath: outputPath,
-                       filename: "/test.gif"
+                        }, delays: items.map { Double($0.length)! },
+                           docDirPath: outputPath,
+                           filename: "/test.gif"
                     )
                     
                     print("Success: \(success)")
