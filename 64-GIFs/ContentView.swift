@@ -16,7 +16,7 @@ extension String {
 
 let outputPath = "/Users/loyihsu/Downloads/aa/" // For testing
 
-struct Source: Identifiable {
+struct Source: Identifiable, Equatable {
     var id: Int
     
     var location: String
@@ -24,10 +24,19 @@ struct Source: Identifiable {
     var removed: Bool = false
 }
 
+extension Array where Element == Source {
+    func firstIndex(of element: Element) -> Int? {
+        return self.firstIndex(where: { $0.id == element.id })
+    }
+}
+
 var inputCount = 0
 
 struct ContentView: View {
     @State var sources: [Source] = []
+    var restingItems: [Source] { sources.filter { $0.removed == false } }
+    var count: Int { restingItems.count }
+
 
     func openDocument() {
         let panel = NSOpenPanel()
@@ -59,6 +68,42 @@ struct ContentView: View {
         sources = output
     }
 
+    func moveItem(dir: String, i: Source) {
+        let index = self.sources.firstIndex(of: i)!
+        var newIndex: Int = 0
+        var flag = false
+        if dir == "up" {
+            var temp = index - 1
+
+            while temp >= 0 {
+                if self.sources[temp].removed == false {
+                    newIndex = temp
+                    flag = true
+                    break
+                }
+                temp -= 1
+            }
+
+            if flag == false { return }
+        } else {
+            for i in index+1..<self.sources.count {
+                if self.sources[i].removed == false {
+                    newIndex = i
+                    flag = true
+                    break
+                }
+            }
+
+            if flag == false { return }
+        }
+
+        if index != newIndex {
+            let temp = sources[index]
+            sources[index] = sources[newIndex]
+            sources[newIndex] = temp
+        }
+    }
+
     var body: some View {
         VStack {
             ScrollView(.vertical) {
@@ -72,16 +117,33 @@ struct ContentView: View {
                                 Text(i.location.lastElement())
 
                                 TextField("seconds",
-                                          text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
+                                          text: self.$sources[self.sources.firstIndex(of: i)!].length)
                                 Text("seconds")
 
-                                Button("Remove") {
-                                    self.sources[self.sources.firstIndex(where: { $0.id == i.id })!].removed = true
+                                Button("✘") {
+                                    self.sources[self.sources.firstIndex(of: i)!].removed = true
                                 }
+
+                                Button("⬆") {
+                                    self.moveItem(dir: "up", i: i)
+                                }
+                                .disabled(i == self.restingItems.first!)
+
+                                Button("⬇") {
+                                    self.moveItem(dir: "down", i: i)
+                                }
+                                .disabled(i == self.restingItems.last!)
                             }
                             .frame(width: 480, height: 50)
                         }
                     }
+
+                    if count != 0 {
+                        Button("Clear") {
+                            self.clear()
+                        }
+                    }
+
                     // Drag & Drop
                 }
             }
@@ -102,13 +164,10 @@ struct ContentView: View {
                     print("Success: \(success)")
                 }
                 .padding()
+                .disabled(count == 0)
                 
-                Button("Open Document") {
+                Button("Open Document(s)") {
                     self.openDocument()
-                    
-                }
-                Button("Clear") {
-                    self.clear()
                 }
             }
         }
