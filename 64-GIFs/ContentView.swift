@@ -21,13 +21,14 @@ struct Source: Identifiable {
     
     var location: String
     var length: String
+    var removed: Bool = false
 }
 
 var inputCount = 0
 
 struct ContentView: View {
     @State var sources: [Source] = []
-    
+
     func openDocument() {
         let panel = NSOpenPanel()
         
@@ -51,30 +52,35 @@ struct ContentView: View {
     }
     
     func clear() {
-        self.sources = []
+        var output = sources
+        for index in 0..<output.count {
+            output[index].removed = true
+        }
+        sources = output
     }
-    
+
     var body: some View {
         VStack {
             ScrollView(.vertical) {
                 VStack {
                     ForEach(sources) { i in
-                        HStack {
-                            Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
-                                .frame(width: 32, height: 32)
-                            
-                            Text(i.location.lastElement())
-                            
-                            #warning("index out of range error")
-                            TextField("seconds",
-                                      text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
-                            Text("seconds")
-                            
-                            Button("Remove") {
-                                self.sources.remove(at: self.sources.firstIndex(where: { $0.id == i.id })!)
+                        if !i.removed {
+                            HStack {
+                                Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
+                                    .frame(width: 32, height: 32)
+
+                                Text(i.location.lastElement())
+
+                                TextField("seconds",
+                                          text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
+                                Text("seconds")
+
+                                Button("Remove") {
+                                    self.sources[self.sources.firstIndex(where: { $0.id == i.id })!].removed = true
+                                }
                             }
+                            .frame(width: 480, height: 50)
                         }
-                        .frame(width: 480, height: 50)
                     }
                     // Drag & Drop
                 }
@@ -84,7 +90,7 @@ struct ContentView: View {
             
             HStack {
                 Button("Generate") {
-                    let items = self.sources
+                    let items = self.sources.filter { $0.removed == false }
                     
                     let success = generateGIFs(from: items.map {
                         NSImage(contentsOfFile: $0.location)!
@@ -94,8 +100,6 @@ struct ContentView: View {
                     )
                     
                     print("Success: \(success)")
-                    
-                    //self.sources.forEach { print($0.length) }
                 }
                 .padding()
                 
@@ -110,7 +114,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

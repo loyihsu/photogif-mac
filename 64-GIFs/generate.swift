@@ -40,20 +40,3 @@ func generateGIFs(from photos: [NSImage], delays: [Double],
     
     return false
 }
-
-//let testImages = ["/Users/loyihsu/Downloads/aa/01.png",
-//                  "/Users/loyihsu/Downloads/aa/02.png",
-//                  "/Users/loyihsu/Downloads/aa/03.png"]
-//
-//let delays: [Double] = [2, 2, 2]
-//
-//let images = testImages.map{ NSImage.init(contentsOfFile: $0)! }
-//
-//let outputPath = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
-
-//if generateGIFs(from: images, delays: delays, docDirPath: outputPath, filename: "/test.gif") {
-//    print("Success")
-//} else {
-//    print("Failed")
-//}
-
