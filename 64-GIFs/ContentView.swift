@@ -14,8 +14,6 @@ extension String {
     }
 }
 
-let outputPath = "/Users/loyihsu/Downloads/aa/" // For testing
-
 struct Source: Identifiable, Equatable {
     var id: Int
     
@@ -34,9 +32,24 @@ var inputCount = 0
 
 struct ContentView: View {
     @State var sources: [Source] = []
+    @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     var restingItems: [Source] { sources.filter { $0.removed == false } }
     var count: Int { restingItems.count }
 
+    func selectPath() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+
+        let result = panel.runModal()
+        if result == .OK {
+            if var str = panel.url?.absoluteString {
+                str = str.components(separatedBy: "file://").joined()
+
+                self.outputPath = str
+            }
+        }
+    }
 
     func openDocument() {
         let panel = NSOpenPanel()
@@ -132,6 +145,7 @@ struct ContentView: View {
                                 Button("⬇") {
                                     self.moveItem(dir: "down", i: i)
                                 }
+
                                 .disabled(i == self.restingItems.last!)
                             }
                             .frame(width: 480, height: 50)
@@ -149,7 +163,14 @@ struct ContentView: View {
             }
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
-            
+
+            VStack {
+                Text(outputPath)
+                Button("Change Output Path") {
+                    self.selectPath()
+                }
+            }
+
             HStack {
                 Button("Generate") {
                     let items = self.sources.filter { $0.removed == false }
@@ -157,7 +178,7 @@ struct ContentView: View {
                     let success = generateGIFs(from: items.map {
                         NSImage(contentsOfFile: $0.location)!
                         }, delays: items.map { Double($0.length)! },
-                           docDirPath: outputPath,
+                           docDirPath: self.outputPath,
                            filename: "/test.gif"
                     )
                     
@@ -165,8 +186,8 @@ struct ContentView: View {
                 }
                 .padding()
                 .disabled(count == 0)
-                
-                Button("Open Document(s)") {
+
+                Button("Import Image(s)") {
                     self.openDocument()
                 }
             }
