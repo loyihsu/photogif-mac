@@ -17,26 +17,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         
-        let listOfItems = [
-            "/Users/loyihsu/Downloads/aa/01.png",
-            "/Users/loyihsu/Downloads/aa/02.png",
-            "/Users/loyihsu/Downloads/aa/03.png"
-        ]
+//        let listOfItems = [
+//            "/Users/loyihsu/Downloads/aa/01.png",
+//            "/Users/loyihsu/Downloads/aa/02.png",
+//            "/Users/loyihsu/Downloads/aa/03.png"
+//        ]
+//
+//        var sourceList = [Source]()
+//        var count = 0
+//
+//        for item in listOfItems {
+//            let newitem = Source.init(id: count,
+//                                      location: item,
+//                                      length: "1")
+//            sourceList.append(newitem)
+//            count += 1
+//        }
+//
+//        let contentView = ContentView.init(sources: sourceList)
         
-        var sourceList = [Source]()
-        var count = 0
-        
-        for item in listOfItems {
-            let newitem = Source.init(id: count,
-                                      location: item,
-                                      length: "1")
-            sourceList.append(newitem)
-            count += 1
-        }
-        
-        let contentView = ContentView.init(sources: sourceList)
-        
-//        let contentView = ContentView()
+        let contentView = ContentView()
         
         // Create the window and set the content view.
         window = NSWindow(

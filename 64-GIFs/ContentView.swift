@@ -30,6 +30,23 @@ struct ContentView: View {
         sources.remove(atOffsets: offsets)
     }
     
+    func openDocument() {
+        let panel = NSOpenPanel()
+        
+        let result = panel.runModal()
+        if result == .OK {
+            if var str = panel.url?.absoluteString {
+                str = str.components(separatedBy: "file://").joined()
+                
+                self.sources.append(Source.init(
+                    id: self.sources.count - 1,
+                    location: str,
+                    length: "1")
+                )
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
             ScrollView(.vertical) {
@@ -37,7 +54,7 @@ struct ContentView: View {
                     ForEach(sources) { i in
                         HStack {
                             Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
-                                .frame(width: 32, height: 32)
+                               .frame(width: 32, height: 32)
                             
                             Text(i.location.lastElement())
                             
@@ -59,21 +76,28 @@ struct ContentView: View {
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
             
-            Button("Generate") {
-                let items = self.sources
+            HStack {
+                Button("Generate") {
+                    let items = self.sources
+                    
+                    let success = generateGIFs(from: items.map {
+                        NSImage(contentsOfFile: $0.location)!
+                    }, delays: items.map { Double($0.length)! },
+                       docDirPath: outputPath,
+                       filename: "/test.gif"
+                    )
+                    
+                    print("Success: \(success)")
+                    
+                    //self.sources.forEach { print($0.length) }
+                }
+                .padding()
                 
-                let success = generateGIFs(from: items.map {
-                    NSImage(contentsOfFile: $0.location)!
-                }, delays: items.map { Double($0.length)! },
-                   docDirPath: outputPath,
-                   filename: "/test.gif"
-                )
-                
-                print("Success: \(success)")
-                
-                //self.sources.forEach { print($0.length) }
+                Button("Open Document") {
+                    self.openDocument()
+                    
+                }
             }
-            .padding()
         }
     }
 }
