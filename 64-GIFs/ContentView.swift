@@ -16,53 +16,64 @@ extension String {
 
 let outputPath = "/Users/loyihsu/Downloads/aa/" // For testing
 
+struct Source: Identifiable {
+    var id: Int
+    
+    var location: String
+    var length: String
+}
+
 struct ContentView: View {
-    @State var sources: [String] = []
-    @State var length: [String] = []
+    @State var sources: [Source] = []
+    
+    func removeRows(at offsets: IndexSet) {
+        sources.remove(atOffsets: offsets)
+    }
     
     var body: some View {
         VStack {
             ScrollView(.vertical) {
                 VStack {
-                    
-                    // Current implementation cannot handle remove events
-                    // Suggestion is to change it to id-based ForEach
-                    // Or find a way to access it from within
-                    
-                    // Drag & Drop
-                    
-                    ForEach(0..<sources.count) { index in
+                    ForEach(sources) { i in
                         HStack {
-                            Image.init(nsImage: NSImage.init(contentsOfFile: self.sources[index])!).resizable()
+                            Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
                                 .frame(width: 32, height: 32)
                             
-                            Text(self.sources[index].lastElement())
-                
-                            TextField("Seconds", text: self.$length[index])
-                            Text("Seconds")
+                            Text(i.location.lastElement())
                             
-                            Button.init("Remove") {
-                                //self.sources.remove(at: index)
-                                //self.length.remove(at: index)
+                            TextField("seconds", text: self.$sources[self.sources.firstIndex(where: { $0.id == i.id })!].length)
+                            Text("seconds")
+                            
+                            Button("Remove") {
+                                self.sources.remove(at: self.sources.firstIndex(where: {
+                                    $0.id == i.id
+                                })!)
                             }
                         }
                         .frame(width: 480, height: 50)
                     }
+                    .onDelete(perform: removeRows)
+                    // Drag & Drop
                 }
             }
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
             
             Button("Generate") {
-                if generateGIFs(from: self.sources.map { NSImage.init(contentsOfFile: $0)! }, delays: self.length.map { Double($0)! }, docDirPath: outputPath, filename: "/test.gif") {
-                    print("Success")
-                } else {
-                    print("Failed")
-                }
+                let items = self.sources
+                
+                let success = generateGIFs(from: items.map {
+                    NSImage(contentsOfFile: $0.location)!
+                }, delays: items.map { Double($0.length)! },
+                   docDirPath: outputPath,
+                   filename: "/test.gif"
+                )
+                
+                print("Success: \(success)")
+                
+                //self.sources.forEach { print($0.length) }
             }
             .padding()
-            
-            // Right: add button
         }
     }
 }
@@ -70,37 +81,23 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-
-        ContentView.init(sources: [
+        let listOfItems = [
             "/Users/loyihsu/Downloads/aa/01.png",
             "/Users/loyihsu/Downloads/aa/02.png",
             "/Users/loyihsu/Downloads/aa/03.png"
-        ], length: [ "1", "1", "1" ])
+        ]
+        
+        var sourceList = [Source]()
+        var count = 0
+        
+        for item in listOfItems {
+            let newitem = Source.init(id: count,
+                                      location: item,
+                                      length: "1")
+            sourceList.append(newitem)
+            count += 1
+        }
+        
+        return ContentView(sources: sourceList)
     }
 }
-
-//struct ContentView_Previews_Empty: PreviewProvider {
-//    static var previews: some View {
-//        ContentView.init()
-//    }
-//}
-
-//struct ContentView_Previews_Long: PreviewProvider {
-//    static var previews: some View {
-//
-//        ContentView.init(sources: [
-//            "/Users/loyihsu/Downloads/aa/01.png",
-//            "/Users/loyihsu/Downloads/aa/02.png",
-//            "/Users/loyihsu/Downloads/aa/03.png",
-//            "/Users/loyihsu/Downloads/aa/01.png",
-//            "/Users/loyihsu/Downloads/aa/02.png",
-//            "/Users/loyihsu/Downloads/aa/03.png",
-//            "/Users/loyihsu/Downloads/aa/01.png",
-//            "/Users/loyihsu/Downloads/aa/02.png",
-//            "/Users/loyihsu/Downloads/aa/03.png",
-//            "/Users/loyihsu/Downloads/aa/01.png",
-//            "/Users/loyihsu/Downloads/aa/02.png",
-//            "/Users/loyihsu/Downloads/aa/03.png"
-//        ], length: [ "1", "1", "1","1", "1", "1","1", "1", "1","1", "1", "1" ])
-//    }
-//}
