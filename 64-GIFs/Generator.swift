@@ -1,5 +1,5 @@
 //
-//  generate.swift
+//  Generator.swift
 //  64-GIFs
 //
 //  Created by Loyi Hsu on 2020/5/16.
@@ -9,7 +9,7 @@
 import ImageIO
 import Cocoa
 
-func generateGIFs(from photos: [NSImage], delays: [Double],
+func generateGIF(from photos: [NSImage], delays: [Double],
                   docDirPath: String, filename: String) -> Bool {
     if photos.count < 1 { return false }
     

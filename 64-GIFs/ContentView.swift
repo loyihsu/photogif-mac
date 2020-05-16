@@ -10,69 +10,36 @@ import SwiftUI
 
 extension String {
     func lastElement() -> String {
-        return self.components(separatedBy: "/").last ?? "Image"
-    }
-}
-
-struct Source: Identifiable, Equatable {
-    var id: Int
-    
-    var location: String
-    var length: String
-    var removed: Bool = false
-}
-
-extension Array where Element == Source {
-    func firstIndex(of element: Element) -> Int? {
-        return self.firstIndex(where: { $0.id == element.id })
+        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? "Image"
     }
 }
 
 var inputCount = 0
 
-struct ContentView: View {
+func formatFilename(_ str: String) -> String {
+    return str.components(separatedBy: ".gif").joined()
+}
+
+struct ContentView: View, DropDelegate {
     @State var sources: [Source] = []
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
+    @State var filename: String = "output"
     var restingItems: [Source] { sources.filter { $0.removed == false } }
     var count: Int { restingItems.count }
 
-    func selectPath() {
-        let panel = NSOpenPanel()
-        panel.canChooseDirectories = true
-        panel.canChooseFiles = false
-
-        let result = panel.runModal()
-        if result == .OK {
-            if var str = panel.url?.absoluteString {
-                str = str.components(separatedBy: "file://").joined()
-
-                self.outputPath = str
+    func performDrop(info: DropInfo) -> Bool {
+        for item in info.itemProviders(for: ["public.file-url"]) {
+            item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
+                if let data = urlData as? Data, let url = URL.init(dataRepresentation: data, relativeTo: nil) {
+                    append(url, to: &self.sources)
+                    //print(url.absoluteString)
+                }
             }
         }
+
+        return true
     }
 
-    func openDocument() {
-        let panel = NSOpenPanel()
-        
-        panel.allowsMultipleSelection = true
-        
-        let result = panel.runModal()
-        if result == .OK {
-            for url in panel.urls {
-                var str = url.absoluteString
-                str = str.components(separatedBy: "file://").joined()
-                
-                self.sources.append(Source.init(
-                    id: inputCount,
-                    location: str,
-                    length: "1")
-                )
-                
-                inputCount += 1
-            }
-        }
-    }
-    
     func clear() {
         var output = sources
         for index in 0..<output.count {
@@ -120,11 +87,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             ScrollView(.vertical) {
-                VStack {
+                VStack(alignment: .center) {
+                    HStack{ Spacer() }
+                    Button("Import Image(s)") {
+                        openDocument(&self.sources)
+                    }
                     ForEach(sources) { i in
                         if !i.removed {
                             HStack {
-                                Image(nsImage: NSImage(contentsOfFile: i.location)!).resizable()
+                                Image(nsImage: i.nsImage).resizable()
                                     .frame(width: 32, height: 32)
 
                                 Text(i.location.lastElement())
@@ -151,23 +122,31 @@ struct ContentView: View {
                             .frame(width: 480, height: 50)
                         }
                     }
-
                     if count != 0 {
                         Button("Clear") {
                             self.clear()
                         }
                     }
-
-                    // Drag & Drop
                 }
             }
+            .onDrop(of: ["public.file-url"], delegate: self)
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
 
             VStack {
-                Text(outputPath)
-                Button("Change Output Path") {
-                    self.selectPath()
+                HStack {
+                    Text("🗂 \(outputPath.lastElement())")
+                    Button("Change Output Path") {
+                        if let selected = selectPath() {
+                            self.outputPath = selected
+                        }
+                    }
+                }
+
+                HStack {
+                    Text("Output Filename")
+                    TextField("Output Filename", text: $filename)
+                        .frame(width: 135, height: 12, alignment: .center)
                 }
             }
 
@@ -175,21 +154,17 @@ struct ContentView: View {
                 Button("Generate") {
                     let items = self.sources.filter { $0.removed == false }
                     
-                    let success = generateGIFs(from: items.map {
+                    let success = generateGIF(from: items.map {
                         NSImage(contentsOfFile: $0.location)!
                         }, delays: items.map { Double($0.length)! },
                            docDirPath: self.outputPath,
-                           filename: "/test.gif"
+                           filename: "/\(formatFilename(self.filename)).gif"
                     )
                     
                     print("Success: \(success)")
                 }
                 .padding()
                 .disabled(count == 0)
-
-                Button("Import Image(s)") {
-                    self.openDocument()
-                }
             }
         }
     }
@@ -209,7 +184,8 @@ struct ContentView_Previews: PreviewProvider {
         for item in listOfItems {
             let newitem = Source.init(id: count,
                                       location: item,
-                                      length: "1")
+                                      length: "1",
+                                      nsImage: NSImage.init(contentsOf: URL(string: item)!)!)
             sourceList.append(newitem)
             count += 1
         }
