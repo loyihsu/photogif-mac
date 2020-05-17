@@ -52,3 +52,13 @@ func append(_ item: URL, to sources: inout [Source]) {
         inputCount += 1
     }
 }
+
+func formatFilename(_ str: String) -> String {
+    return str.components(separatedBy: ".gif").joined()
+}
+
+extension String {
+    func lastElement() -> String {
+        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? "Image"
+    }
+}

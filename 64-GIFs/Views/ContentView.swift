@@ -8,28 +8,21 @@
 
 import SwiftUI
 
-extension String {
-    func lastElement() -> String {
-        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? "Image"
-    }
-}
-
 var inputCount = 0
 
-func formatFilename(_ str: String) -> String {
-    return str.components(separatedBy: ".gif").joined()
-}
+let acceptableFileExt = "public.file-url"
 
 struct ContentView: View, DropDelegate {
     @State var sources: [Source] = []
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     @State var filename: String = "output"
+    @State var generateState: String = ""
     var restingItems: [Source] { sources.filter { $0.removed == false } }
     var count: Int { restingItems.count }
 
     func performDrop(info: DropInfo) -> Bool {
-        for item in info.itemProviders(for: ["public.file-url"]) {
-            item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
+        for item in info.itemProviders(for: [acceptableFileExt]) {
+            item.loadItem(forTypeIdentifier: acceptableFileExt, options: nil) { (urlData, error) in
                 if let data = urlData as? Data, let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     append(url, to: &self.sources)
                     //print(url.absoluteString)
@@ -38,14 +31,6 @@ struct ContentView: View, DropDelegate {
         }
 
         return true
-    }
-
-    func clear() {
-        var output = sources
-        for index in 0..<output.count {
-            output[index].removed = true
-        }
-        sources = output
     }
 
     func moveItem(dir: String, i: Source) {
@@ -102,7 +87,9 @@ struct ContentView: View, DropDelegate {
 
                                 TextField("seconds",
                                           text: self.$sources[self.sources.firstIndex(of: i)!].length)
-                                Text("seconds")
+                                #warning("TODO: Only accept numbers & no negatives")
+
+                                Text(Int(i.length) ?? 2 == 1 ? "second" : "seconds")
 
                                 Button("✘") {
                                     self.sources[self.sources.firstIndex(of: i)!].removed = true
@@ -116,7 +103,6 @@ struct ContentView: View, DropDelegate {
                                 Button("⬇") {
                                     self.moveItem(dir: "down", i: i)
                                 }
-
                                 .disabled(i == self.restingItems.last!)
                             }
                             .frame(width: 480, height: 50)
@@ -124,12 +110,12 @@ struct ContentView: View, DropDelegate {
                     }
                     if count != 0 {
                         Button("Clear") {
-                            self.clear()
+                            clear(&self.sources)
                         }
                     }
                 }
             }
-            .onDrop(of: ["public.file-url"], delegate: self)
+            .onDrop(of: [acceptableFileExt], delegate: self)
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
 
@@ -160,12 +146,18 @@ struct ContentView: View, DropDelegate {
                            docDirPath: self.outputPath,
                            filename: "/\(formatFilename(self.filename)).gif"
                     )
-                    
-                    print("Success: \(success)")
+
+                    self.generateState = success ? "✅" : "❌"
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        self.generateState = ""
+                    }
+
                 }
-                .padding()
                 .disabled(count == 0)
+                Text(generateState)
             }
+            .padding()
         }
     }
 }

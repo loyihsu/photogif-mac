@@ -24,3 +24,11 @@ extension Array where Element == Source {
         return self.firstIndex(where: { $0.id == element.id })
     }
 }
+
+func clear(_ sources: inout [Source]) {
+    var output = sources
+    for index in 0..<output.count {
+        output[index].removed = true
+    }
+    sources = output
+}
