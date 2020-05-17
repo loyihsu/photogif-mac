@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
 		FF8DC07C2470741800FCC99F /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07B2470741800FCC99F /* Source.swift */; };
 		FF8DC07F247076D400FCC99F /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Files.swift */; };
 		FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		FF8DC07B2470741800FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +44,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF4F6D1324711CB400CE308C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFE9E970246EC7C6009DCC99 /* ContentView.swift */,
+				FF4F6D11247118D900CE308C /* AboutView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FFE9E962246EC7C6009DCC99 = {
 			isa = PBXGroup;
 			children = (
@@ -61,8 +72,8 @@
 		FFE9E96D246EC7C6009DCC99 /* 64-GIFs */ = {
 			isa = PBXGroup;
 			children = (
+				FF4F6D1324711CB400CE308C /* Views */,
 				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-				FFE9E970246EC7C6009DCC99 /* ContentView.swift */,
 				FFE9E981246F1339009DCC99 /* Generator.swift */,
 				FF8DC07B2470741800FCC99F /* Source.swift */,
 				FF8DC07E247076D400FCC99F /* Files.swift */,
@@ -159,6 +170,7 @@
 				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
 				FF8DC07F247076D400FCC99F /* Files.swift in Sources */,
 				FFE9E982246F1339009DCC99 /* Generator.swift in Sources */,
+				FF4F6D12247118D900CE308C /* AboutView.swift in Sources */,
 				FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

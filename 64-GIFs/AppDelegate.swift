@@ -13,28 +13,10 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    var aboutWindow = NSWindow()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
-        
-//        let listOfItems = [
-//            "/Users/loyihsu/Downloads/aa/01.png",
-//            "/Users/loyihsu/Downloads/aa/02.png",
-//            "/Users/loyihsu/Downloads/aa/03.png"
-//        ]
-//
-//        var sourceList = [Source]()
-//        var count = 0
-//
-//        for item in listOfItems {
-//            let newitem = Source.init(id: count,
-//                                      location: item,
-//                                      length: "1")
-//            sourceList.append(newitem)
-//            count += 1
-//        }
-//
-//        let contentView = ContentView.init(sources: sourceList)
         
         let contentView = ContentView()
         
@@ -56,6 +38,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+
+    @IBAction func callCustomisedAboutView(_ caller: NSMenuItem) {
+        let aboutView = AboutView()
+
+        aboutWindow = NSWindow(
+        contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+        styleMask: [.titled, .closable, .fullSizeContentView],
+        backing: .buffered, defer: false)
+
+        aboutWindow.titlebarAppearsTransparent = true
+
+        aboutWindow.center()
+        aboutWindow.setFrameAutosaveName("About Window")
+        aboutWindow.contentView = NSHostingView(rootView: aboutView)
+        aboutWindow.makeKeyAndOrderFront(nil)
+    }
 
 }
 
