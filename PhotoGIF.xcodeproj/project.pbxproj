@@ -20,7 +20,7 @@
 /* Begin PBXFileReference section */
 		FF8DC07B2470741800FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
-		FFE9E96B246EC7C6009DCC99 /* 64-GIFs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "64-GIFs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE9E970246EC7C6009DCC99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FFE9E972246EC7CA009DCC99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		FFE9E96C246EC7C6009DCC99 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9E96B246EC7C6009DCC99 /* 64-GIFs.app */,
+				FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */,
 			);
 			name = Products;
 			path = ..;
@@ -87,9 +87,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FFE9E96A246EC7C6009DCC99 /* 64-GIFs */ = {
+		FFE9E96A246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FFE9E97E246EC7CA009DCC99 /* Build configuration list for PBXNativeTarget "64-GIFs" */;
+			buildConfigurationList = FFE9E97E246EC7CA009DCC99 /* Build configuration list for PBXNativeTarget "PhotoGIF" */;
 			buildPhases = (
 				FFE9E967246EC7C6009DCC99 /* Sources */,
 				FFE9E968246EC7C6009DCC99 /* Frameworks */,
@@ -99,9 +99,9 @@
 			);
 			dependencies = (
 			);
-			name = "64-GIFs";
+			name = PhotoGIF;
 			productName = "64-GIFs";
-			productReference = FFE9E96B246EC7C6009DCC99 /* 64-GIFs.app */;
+			productReference = FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -119,7 +119,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FFE9E966246EC7C6009DCC99 /* Build configuration list for PBXProject "64-GIFs" */;
+			buildConfigurationList = FFE9E966246EC7C6009DCC99 /* Build configuration list for PBXProject "PhotoGIF" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -132,7 +132,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FFE9E96A246EC7C6009DCC99 /* 64-GIFs */,
+				FFE9E96A246EC7C6009DCC99 /* PhotoGIF */,
 			);
 		};
 /* End PBXProject section */
@@ -339,7 +339,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FFE9E966246EC7C6009DCC99 /* Build configuration list for PBXProject "64-GIFs" */ = {
+		FFE9E966246EC7C6009DCC99 /* Build configuration list for PBXProject "PhotoGIF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFE9E97C246EC7CA009DCC99 /* Debug */,
@@ -348,7 +348,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FFE9E97E246EC7CA009DCC99 /* Build configuration list for PBXNativeTarget "64-GIFs" */ = {
+		FFE9E97E246EC7CA009DCC99 /* Build configuration list for PBXNativeTarget "PhotoGIF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFE9E97F246EC7CA009DCC99 /* Debug */,

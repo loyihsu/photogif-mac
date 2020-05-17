@@ -173,9 +173,9 @@ struct ContentView: View, DropDelegate {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let listOfItems = [
-            "/Users/loyihsu/Downloads/aa/01.png",
-            "/Users/loyihsu/Downloads/aa/02.png",
-            "/Users/loyihsu/Downloads/aa/03.png"
+            "/Users/loyihsu/Downloads/others/aa/01.png",
+            "/Users/loyihsu/Downloads/others/aa/02.png",
+            "/Users/loyihsu/Downloads/others/aa/03.png"
         ]
         
         var sourceList = [Source]()
