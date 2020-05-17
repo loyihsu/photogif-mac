@@ -10,7 +10,18 @@ import SwiftUI
 
 var inputCount = 0
 
-#warning("Need to validate dropped items for image types.")
+let acceptableTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
+
+func showAlert(_ issue: String) -> Bool {
+    let alert: NSAlert = NSAlert()
+    alert.messageText = issue
+    alert.alertStyle = .warning
+    alert.addButton(withTitle: "OK")
+
+    let res = alert.runModal()
+    if res == .alertFirstButtonReturn { return true }
+    return false
+}
 
 func validate(_ str: String) -> Bool {
     let output = str.filter { "0123456789.".contains($0) }
@@ -33,8 +44,11 @@ struct ContentView: View, DropDelegate {
     func performDrop(info: DropInfo) -> Bool {
         for item in info.itemProviders(for: ["public.file-url"]) {
             item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
-                if let data = urlData as? Data, let url = URL.init(dataRepresentation: data, relativeTo: nil) {
-                    append(url, to: &self.sources)
+                if let data = urlData as? Data,
+                    let url = URL.init(dataRepresentation: data, relativeTo: nil) {
+                    if acceptableTypes.contains(url.pathExtension.lowercased()) {
+                        append(url, to: &self.sources)
+                    }
                 }
             }
         }
@@ -152,11 +166,10 @@ struct ContentView: View, DropDelegate {
                 Button("Generate") {
                     let items = self.sources.filter { $0.removed == false }
                     
-                    let success = generateGIF(from: items.map {
-                        NSImage(contentsOfFile: $0.location)!
-                        }, delays: items.map { Double($0.length)! },
-                           docDirPath: self.outputPath,
-                           filename: "/\(formatFilename(self.filename)).gif"
+                    let success = generateGIF(from: items.map { $0.nsImage },
+                                              delays: items.map { Double($0.length)! },
+                                              docDirPath: self.outputPath,
+                                              filename: "/\(formatFilename(self.filename)).gif"
                     )
 
                     self.generateState = success ? "✅" : "❌"

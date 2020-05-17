@@ -27,6 +27,7 @@ func openDocument(_ sources: inout [Source]) {
     let panel = NSOpenPanel()
 
     panel.allowsMultipleSelection = true
+    panel.allowedFileTypes = acceptableTypes
 
     let result = panel.runModal()
     if result == .OK {
@@ -37,20 +38,25 @@ func openDocument(_ sources: inout [Source]) {
 }
 
 func append(_ item: URL, to sources: inout [Source]) {
-    if let image = NSImage.init(contentsOf: item) {
-        print(item)
+    if acceptableTypes.contains(item.pathExtension.lowercased()) {
+        if let image = NSImage.init(contentsOf: item) {
+            print(item)
 
-        let str = item.absoluteString.components(separatedBy: "file://").joined()
+            let str = item.absoluteString.components(separatedBy: "file://").joined()
 
-        sources.append(Source.init(
-            id: inputCount,
-            location: str,
-            length: "1",
-            nsImage: image)
-        )
+            sources.append(Source.init(
+                id: inputCount,
+                location: str,
+                length: "1",
+                nsImage: image)
+            )
 
-        inputCount += 1
+            inputCount += 1
+            return
+        }
     }
+
+    let _ = showAlert("\(item.absoluteString.lastElement()) cannot be recognised.")
 }
 
 func formatFilename(_ str: String) -> String {
