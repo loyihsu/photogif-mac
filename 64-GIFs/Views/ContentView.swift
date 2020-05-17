@@ -10,22 +10,31 @@ import SwiftUI
 
 var inputCount = 0
 
-let acceptableFileExt = "public.file-url"
+#warning("Need to validate dropped items for image types.")
+
+func validate(_ str: String) -> Bool {
+    let output = str.filter { "0123456789.".contains($0) }
+    let count = str.filter { $0 == "." }.count
+    return str == output && count <= 1
+}
 
 struct ContentView: View, DropDelegate {
     @State var sources: [Source] = []
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     @State var filename: String = "output"
     @State var generateState: String = ""
+
     var restingItems: [Source] { sources.filter { $0.removed == false } }
     var count: Int { restingItems.count }
 
+    var protectNumOnly: Bool { restingItems.filter { validate($0.length) }.count > 0 }
+    var protectEmpty: Bool { restingItems.filter { $0.length.isEmpty == true }.count > 0}
+
     func performDrop(info: DropInfo) -> Bool {
-        for item in info.itemProviders(for: [acceptableFileExt]) {
-            item.loadItem(forTypeIdentifier: acceptableFileExt, options: nil) { (urlData, error) in
+        for item in info.itemProviders(for: ["public.file-url"]) {
+            item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
                 if let data = urlData as? Data, let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     append(url, to: &self.sources)
-                    //print(url.absoluteString)
                 }
             }
         }
@@ -87,9 +96,12 @@ struct ContentView: View, DropDelegate {
 
                                 TextField("seconds",
                                           text: self.$sources[self.sources.firstIndex(of: i)!].length)
-                                #warning("TODO: Only accept numbers & no negatives")
 
                                 Text(Int(i.length) ?? 2 == 1 ? "second" : "seconds")
+
+                                if validate(i.length) == false {
+                                    Text("❌")
+                                }
 
                                 Button("✘") {
                                     self.sources[self.sources.firstIndex(of: i)!].removed = true
@@ -115,7 +127,7 @@ struct ContentView: View, DropDelegate {
                     }
                 }
             }
-            .onDrop(of: [acceptableFileExt], delegate: self)
+            .onDrop(of: ["public.file-url"], delegate: self)
             .frame(width: 480, height: 360, alignment: .topLeading)
             .padding()
 
@@ -154,7 +166,7 @@ struct ContentView: View, DropDelegate {
                     }
 
                 }
-                .disabled(count == 0)
+                .disabled(count == 0 || !protectNumOnly || protectEmpty)
                 Text(generateState)
             }
             .padding()
