@@ -48,6 +48,8 @@ struct ContentView: View, DropDelegate {
                     let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     if acceptableTypes.contains(url.pathExtension.lowercased()) {
                         append(url, to: &self.sources)
+                    } else {
+                        self.handleDirectoryURL(url)
                     }
                 }
             }
@@ -55,6 +57,20 @@ struct ContentView: View, DropDelegate {
 
         return true
     }
+
+    func handleDirectoryURL(_ url: URL) {
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            for dir in directoryContents {
+                if acceptableTypes.contains(dir.pathExtension.lowercased()) {
+                    append(dir, to: &self.sources)
+                }
+            }
+        } catch {
+
+        }
+    }
+
 
     func moveItem(dir: String, i: Source) {
         let index = self.sources.firstIndex(of: i)!
