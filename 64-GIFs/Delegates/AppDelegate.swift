@@ -10,10 +10,12 @@ import Cocoa
 import SwiftUI
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     var window: NSWindow!
     var aboutWindow = NSWindow()
+
+    var aboutWindowAppeared = false
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
@@ -38,22 +40,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-
     @IBAction func callCustomisedAboutView(_ caller: NSMenuItem) {
-        let aboutView = AboutView()
+        if aboutWindowAppeared == false {
+            let aboutView = AboutView()
 
-        aboutWindow = NSWindow(
-        contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-        styleMask: [.titled, .closable, .fullSizeContentView],
-        backing: .buffered, defer: false)
+            aboutWindow = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+                styleMask: [.titled, .closable, .fullSizeContentView],
+                backing: .buffered, defer: false)
 
-        aboutWindow.titlebarAppearsTransparent = true
+            aboutWindow.titlebarAppearsTransparent = true
 
-        aboutWindow.center()
-        aboutWindow.setFrameAutosaveName("About Window")
-        aboutWindow.contentView = NSHostingView(rootView: aboutView)
-        aboutWindow.makeKeyAndOrderFront(nil)
+            aboutWindow.center()
+            aboutWindow.setFrameAutosaveName("About Window")
+            aboutWindow.contentView = NSHostingView(rootView: aboutView)
+            aboutWindow.makeKeyAndOrderFront(nil)
+
+            aboutWindow.delegate = self
+            aboutWindowAppeared = true
+        } else {
+            aboutWindow.makeKeyAndOrderFront(nil)
+        }
     }
 
+    func windowWillClose(_ notification: Notification) {
+        aboutWindowAppeared = false
+    }
 }
-

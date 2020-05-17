@@ -17,17 +17,16 @@ struct AboutView: View {
     var body: some View {
         VStack {
             Image(nsImage: NSImage.init(named: "AppIcon")!)
-                .padding()
+                .padding(.bottom)
             Text("\(getCFBundleString(for: "CFBundleName"))")
                 .font(.headline)
                 .padding(8)
-            Text("Ver. \(getCFBundleString(for: "CFBundleShortVersionString"))")
+            Text("Ver. \(getCFBundleString(for: "CFBundleShortVersionString")) (\(getCFBundleString(for:"CFBundleVersion")))")
                 .font(.caption)
-                .padding(.bottom, 16)
+                .padding(.bottom, 20)
             Text("\(getCFBundleString(for: "NSHumanReadableCopyright"))")
-            .padding()
         }
-        .frame(width: 450, height: 320, alignment: .center)
+        .frame(width: 450, height: 290, alignment: .center)
     }
 }
 

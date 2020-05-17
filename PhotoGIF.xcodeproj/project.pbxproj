@@ -53,6 +53,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FFE1FF4C24717BBD00BF49D8 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		FFE9E962246EC7C6009DCC99 = {
 			isa = PBXGroup;
 			children = (
@@ -72,8 +80,8 @@
 		FFE9E96D246EC7C6009DCC99 /* 64-GIFs */ = {
 			isa = PBXGroup;
 			children = (
+				FFE1FF4C24717BBD00BF49D8 /* Delegates */,
 				FF4F6D1324711CB400CE308C /* Views */,
-				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
 				FFE9E981246F1339009DCC99 /* Generator.swift */,
 				FF8DC07B2470741800FCC99F /* Source.swift */,
 				FF8DC07E247076D400FCC99F /* Files.swift */,
