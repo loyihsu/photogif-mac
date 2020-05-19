@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
-		FF8DC07C2470741800FCC99F /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07B2470741800FCC99F /* Source.swift */; };
 		FF8DC07F247076D400FCC99F /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Files.swift */; };
 		FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */; };
 		FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E970246EC7C6009DCC99 /* ContentView.swift */; };
@@ -20,7 +19,6 @@
 
 /* Begin PBXFileReference section */
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		FF8DC07B2470741800FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -29,7 +27,7 @@
 		FFE9E975246EC7CA009DCC99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FFE9E978246EC7CA009DCC99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFE9E97A246EC7CA009DCC99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFE9E97B246EC7CA009DCC99 /* _4_GIFs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = _4_GIFs.entitlements; sourceTree = "<group>"; };
+		FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoGIF.entitlements; sourceTree = "<group>"; };
 		FFE9E981246F1339009DCC99 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,24 +45,17 @@
 		FF4F6D1324711CB400CE308C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FFE9E977246EC7CA009DCC99 /* Main.storyboard */,
 				FFE9E970246EC7C6009DCC99 /* ContentView.swift */,
 				FF4F6D11247118D900CE308C /* AboutView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		FFE1FF4C24717BBD00BF49D8 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
 		FFE9E962246EC7C6009DCC99 = {
 			isa = PBXGroup;
 			children = (
-				FFE9E96D246EC7C6009DCC99 /* 64-GIFs */,
+				FFE9E96D246EC7C6009DCC99 /* PhotoGIF */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,22 +68,20 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		FFE9E96D246EC7C6009DCC99 /* 64-GIFs */ = {
+		FFE9E96D246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXGroup;
 			children = (
-				FFE1FF4C24717BBD00BF49D8 /* Delegates */,
 				FF4F6D1324711CB400CE308C /* Views */,
+				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
 				FFE9E981246F1339009DCC99 /* Generator.swift */,
-				FF8DC07B2470741800FCC99F /* Source.swift */,
 				FF8DC07E247076D400FCC99F /* Files.swift */,
-				FFE9E96C246EC7C6009DCC99 /* Products */,
-				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
-				FFE9E977246EC7CA009DCC99 /* Main.storyboard */,
+				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
-				FFE9E97B246EC7CA009DCC99 /* _4_GIFs.entitlements */,
+				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
+				FFE9E96C246EC7C6009DCC99 /* Products */,
 				FFE9E974246EC7CA009DCC99 /* Preview Content */,
 			);
-			path = "64-GIFs";
+			path = PhotoGIF;
 			sourceTree = "<group>";
 		};
 		FFE9E974246EC7CA009DCC99 /* Preview Content */ = {
@@ -174,7 +163,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8DC07C2470741800FCC99F /* Source.swift in Sources */,
 				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
 				FF8DC07F247076D400FCC99F /* Files.swift in Sources */,
 				FFE9E982246F1339009DCC99 /* Generator.swift in Sources */,
@@ -314,20 +302,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "64-GIFs/_4_GIFs.entitlements";
+				CODE_SIGN_ENTITLEMENTS = PhotoGIF/PhotoGIF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"64-GIFs/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 20051901;
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Preview Content\"";
 				DEVELOPMENT_TEAM = 2A59FUGCBE;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "64-GIFs/Info.plist";
+				INFOPLIST_FILE = PhotoGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.loyi.apps.-4-GIFs";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.apps.photogif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -337,20 +326,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "64-GIFs/_4_GIFs.entitlements";
+				CODE_SIGN_ENTITLEMENTS = PhotoGIF/PhotoGIF.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"64-GIFs/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 20051901;
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Preview Content\"";
 				DEVELOPMENT_TEAM = 2A59FUGCBE;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "64-GIFs/Info.plist";
+				INFOPLIST_FILE = PhotoGIF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "dev.loyi.apps.-4-GIFs";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.apps.photogif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
