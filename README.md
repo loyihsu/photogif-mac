@@ -12,7 +12,7 @@
 * Import the images (drag and drop into the window supported).
 * Setup the time (in seconds) it should stay on screen.
 * Choose your output path.
-* Hit `Generate` and your are good to go ✅.
+* Hit `Generate` and you are good to go ✅.
 
 ## Screenshots
 
