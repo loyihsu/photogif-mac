@@ -101,7 +101,9 @@ struct ContentView: View, DropDelegate {
                         if !i.removed {
                             HStack {
                                 // Image & Preview
-                                Image(nsImage: i.nsImage).resizable()
+                                Image(nsImage: i.nsImage)
+                                    .resizable()
+                                    .scaledToFit()
                                     .frame(width: 32, height: 32)
                                 Text(i.location.lastElement())
                                 
@@ -124,7 +126,7 @@ struct ContentView: View, DropDelegate {
                                 }
                                 .disabled(i == self.restingItems.last!)
                             }
-                            .frame(width: 480, height: 50)
+                            .frame(width: 460, height: 50)
                         }
                     }
                     // Clear list
