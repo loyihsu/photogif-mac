@@ -186,23 +186,25 @@ struct ContentView: View, DropDelegate {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        // let listOfItems: [String] = [
-        //
-        // ]
-        //
-        // var sourceList = [Source]()
-        // var count = 0
-        //
-        // for item in listOfItems {
-        //     let newitem = Source.init(id: count,
-        //                               location: item,
-        //                               length: "1",
-        //                               nsImage: NSImage.init(contentsOf: URL(string: item)!)!)
-        //     sourceList.append(newitem)
-        //     count += 1
-        // }
-        //
-        // return ContentView(sources: sourceList)
+//        let listOfItems: [String] = [
+//
+//        ]
+//
+//        var sourceList = [Source]()
+//
+//        for (index, item) in listOfItems.enumerated() {
+//
+//            if let url = URL.init(string: item),
+//                let image = NSImage.init(contentsOf: url) {
+//                let newitem = Source.init(id: index,
+//                                          location: item,
+//                                          length: "1",
+//                                          nsImage: image)
+//                sourceList.append(newitem)
+//            }
+//        }
+//
+//        return ContentView(sources: sourceList)
         return ContentView()
     }
 }
