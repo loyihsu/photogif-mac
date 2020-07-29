@@ -17,17 +17,17 @@ struct ContentView: View, DropDelegate {
     @State var filename: String = "output"
     @State var generateState: String = ""
     
-    var restingItems: [Source] { sources.filter { $0.removed == false } }
-    var count: Int { restingItems.count }
+    //    var restingItems: [Source] { sources.filter { $0.removed == false } }
+    var count: Int { sources.count }
     
-    var protectNumOnly: Bool { restingItems.filter { validate($0.length) }.count > 0 }
-    var protectEmpty: Bool { restingItems.filter { $0.length.isEmpty == true }.count > 0}
+    var protectNumOnly: Bool { sources.filter { validate($0.length) }.count > 0 }
+    var protectEmpty: Bool { sources.filter { $0.length.isEmpty == true }.count > 0}
     
     func performDrop(info: DropInfo) -> Bool {
         for item in info.itemProviders(for: ["public.file-url"]) {
             item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
                 if let data = urlData as? Data,
-                    let url = URL.init(dataRepresentation: data, relativeTo: nil) {
+                   let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     if acceptableTypes.contains(url.pathExtension.lowercased()) {
                         append(url, to: &self.sources)
                     } else {
@@ -55,34 +55,9 @@ struct ContentView: View, DropDelegate {
     
     func moveItem(dir: String, i: Source) {
         let index = self.sources.firstIndex(of: i)!
-        var newIndex: Int = 0
-        var flag = false
-        if dir == "up" {
-            var temp = index - 1
-            
-            while temp >= 0 {
-                if self.sources[temp].removed == false {
-                    newIndex = temp
-                    flag = true
-                    break
-                }
-                temp -= 1
-            }
-            
-            if flag == false { return }
-        } else {
-            for i in index+1..<self.sources.count {
-                if self.sources[i].removed == false {
-                    newIndex = i
-                    flag = true
-                    break
-                }
-            }
-            
-            if flag == false { return }
-        }
+        let newIndex: Int = dir == "up" ? index - 1 : index + 1
         
-        if index != newIndex {
+        if newIndex >= 0 && newIndex < sources.count {
             let temp = sources[index]
             sources[index] = sources[newIndex]
             sources[newIndex] = temp
@@ -98,41 +73,42 @@ struct ContentView: View, DropDelegate {
                         openDocument(&self.sources)
                     }
                     ForEach(sources) { i in
-                        if !i.removed {
-                            HStack {
-                                // Image & Preview
-                                Image(nsImage: i.nsImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                Text(i.location.lastElement())
-                                
-                                // TextField
-                                TextField("seconds",
-                                          text: self.$sources[self.sources.firstIndex(of: i)!].length)
-                                Text(Int(i.length) ?? 2 == 1 ? "second" : "seconds")
-                                if validate(i.length) == false { Text("❌") }
-                                
-                                // Controls
-                                Button("✘") {
-                                    self.sources[self.sources.firstIndex(of: i)!].removed = true
-                                }
-                                Button("⬆") {
-                                    self.moveItem(dir: "up", i: i)
-                                }
-                                .disabled(i == self.restingItems.first!)
-                                Button("⬇") {
-                                    self.moveItem(dir: "down", i: i)
-                                }
-                                .disabled(i == self.restingItems.last!)
+                        HStack {
+                            // Image & Preview
+                            Image(nsImage: i.nsImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                            Text(i.location.lastElement())
+                            
+                            // TextField
+                            TextField("seconds",
+                                      text: self.$sources[self.sources.firstIndex(of: i)!].length)
+                            Text(Int(i.length) ?? 2 == 1 ? "second" : "seconds")
+                            if validate(i.length) == false { Text("❌") }
+                            
+                            // Controls
+                            Button("✘") {
+                                let id = self.sources.firstIndex(of: i)!
+                                self.sources.remove(at: id)
                             }
-                            .frame(width: 460, height: 50)
+                            Button("⬆") {
+                                self.moveItem(dir: "up", i: i)
+                            }
+                            .disabled(i == self.sources.first!)
+                            Button("⬇") {
+                                self.moveItem(dir: "down", i: i)
+                            }
+                            .disabled(i == self.sources.last!)
                         }
+                        .frame(width: 460, height: 50)
                     }
                     // Clear list
                     if count != 0 {
                         Button("Clear") {
-                            clear(&self.sources)
+                            while !sources.isEmpty {
+                                sources.removeLast()
+                            }
                         }
                     }
                 }
@@ -161,7 +137,7 @@ struct ContentView: View, DropDelegate {
             
             HStack {
                 Button("Generate") {
-                    let items = self.sources.filter { $0.removed == false }
+                    let items = self.sources
                     
                     let success = generateGIF(from: items.map { $0.nsImage },
                                               delays: items.map { Double($0.length)! },
@@ -186,25 +162,25 @@ struct ContentView: View, DropDelegate {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        let listOfItems: [String] = [
-//
-//        ]
-//
-//        var sourceList = [Source]()
-//
-//        for (index, item) in listOfItems.enumerated() {
-//
-//            if let url = URL.init(string: item),
-//                let image = NSImage.init(contentsOf: url) {
-//                let newitem = Source.init(id: index,
-//                                          location: item,
-//                                          length: "1",
-//                                          nsImage: image)
-//                sourceList.append(newitem)
-//            }
-//        }
-//
-//        return ContentView(sources: sourceList)
+        //        let listOfItems: [String] = [
+        //
+        //        ]
+        //
+        //        var sourceList = [Source]()
+        //
+        //        for (index, item) in listOfItems.enumerated() {
+        //
+        //            if let url = URL.init(string: item),
+        //                let image = NSImage.init(contentsOf: url) {
+        //                let newitem = Source.init(id: index,
+        //                                          location: item,
+        //                                          length: "1",
+        //                                          nsImage: image)
+        //                sourceList.append(newitem)
+        //            }
+        //        }
+        //
+        //        return ContentView(sources: sourceList)
         return ContentView()
     }
 }

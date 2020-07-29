@@ -10,14 +10,14 @@ import Cocoa
 
 /// `Source` structure
 struct Source: Identifiable, Equatable {
-    var id: Int                     // For `Identifiable`
+    var id = UUID()                 // Identifier for protocol `Identifiable`
 
     var location: String            // The file location.
     var length: String              // The time the screen should stay in the output gif file.
 
     var nsImage: NSImage            // NSImage render.
 
-    var removed: Bool = false       // Removing the items directly would cause index out of range in SwiftUI.
+//    var removed: Bool = false       // Removing the items directly would cause index out of range in SwiftUI.
                                     // Mark it as removed and filter the arrays by this signal instead.
 }
 
@@ -26,15 +26,6 @@ extension Array where Element == Source {
     func firstIndex(of element: Element) -> Int? {
         return self.firstIndex(where: { $0.id == element.id })
     }
-}
-
-/// Function to clear `sources` array.
-func clear(_ sources: inout [Source]) {
-    var output = sources
-    for (index, _) in output.enumerated() {
-        output[index].removed = true
-    }
-    sources = output
 }
 
 extension String {
@@ -84,11 +75,9 @@ func append(_ item: URL, to sources: inout [Source]) {
         if let image = NSImage.init(contentsOf: item) {
             let str = item.absoluteString.components(separatedBy: "file://").joined()
 
-            sources.append(Source.init(
-                id: inputCount,
-                location: str,
-                length: "1",
-                nsImage: image)
+            sources.append(Source.init(location: str,
+                                       length: "1",
+                                       nsImage: image)
             )
 
             inputCount += 1
