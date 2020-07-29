@@ -1,5 +1,5 @@
 <div align="center" style="text-align: center; margin: auto;">
-    <img src="https://github.com/loyihsu/photogif-mac/blob/master/demo/icon.png?raw=true">
+    <img src="https://github.com/loyihsu/photogif-mac/blob/main/demo/icon.png?raw=true">
     <h1>PhotoGIF</h1>
     <i>A photo to GIF tool built with Swift.</i>
     <br>
@@ -16,8 +16,8 @@
 
 ## Screenshots
 
-![Screenshot](https://github.com/loyihsu/photogif-mac/blob/master/demo/screenshot.png?raw=true)
-![GIF](https://github.com/loyihsu/photogif-mac/blob/master/demo/demo.gif?raw=true)
+![Screenshot](https://github.com/loyihsu/photogif-mac/blob/main/demo/screenshot.png?raw=true)
+![GIF](https://github.com/loyihsu/photogif-mac/blob/main/demo/demo.gif?raw=true)
 
 ## Requirements
 
@@ -29,4 +29,4 @@ As this is a young project, some bugs and missing features here and there are ex
 
 ## License
 
-This code is licensed under [MIT](https://github.com/loyihsu/photogif-mac/blob/master/LICENSE).
+This code is licensed under [MIT](https://github.com/loyihsu/photogif-mac/blob/main/LICENSE).
