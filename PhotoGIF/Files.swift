@@ -14,11 +14,9 @@ struct Source: Identifiable, Equatable {
 
     var location: String            // The file location.
     var length: String              // The time the screen should stay in the output gif file.
-
+    var displayName: String { location.lastElement().removingPercentEncoding ?? location.lastElement() }
+    
     var nsImage: NSImage            // NSImage render.
-
-//    var removed: Bool = false       // Removing the items directly would cause index out of range in SwiftUI.
-                                    // Mark it as removed and filter the arrays by this signal instead.
 }
 
 extension Array where Element == Source {
@@ -53,7 +51,7 @@ func selectPath() -> String? {
 
 /// Function to ouput document and append item into the `[source]`.
 /// - parameter sources: The `[Source]` array to append the items to. (pass by reference)
-func openDocument(_ sources: inout [Source]) {
+func openDocument(list: FileList) {
     let panel = NSOpenPanel()
 
     panel.allowsMultipleSelection = true
@@ -62,7 +60,7 @@ func openDocument(_ sources: inout [Source]) {
     let result = panel.runModal()
     if result == .OK {
         for url in panel.urls {
-            append(url, to: &sources)
+            list.append(url)
         }
     }
 }
@@ -70,24 +68,6 @@ func openDocument(_ sources: inout [Source]) {
 /// Function to append item to `[Source]`.
 /// - parameter item: The `URL` of the item.
 /// - parameter sources: The `[Source]` array to append the items to. (pass by reference)
-func append(_ item: URL, to sources: inout [Source]) {
-    if acceptableTypes.contains(item.pathExtension.lowercased()) {
-        if let image = NSImage.init(contentsOf: item) {
-            let str = item.absoluteString.components(separatedBy: "file://").joined()
-
-            sources.append(Source.init(location: str,
-                                       length: "1",
-                                       nsImage: image)
-            )
-
-            inputCount += 1
-            return
-        }
-    }
-
-    let _ = showAlert("\(item.absoluteString.lastElement()) cannot be recognised.")
-    // Reachable when it is not recognised or NSImage can't be constructed.
-}
 
 /// Function to strip .gif at the end of output filename.
 func formatFilename(_ str: String) -> String {

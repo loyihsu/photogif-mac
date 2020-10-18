@@ -8,20 +8,14 @@
 
 import SwiftUI
 
-var inputCount = 0
-let acceptableTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
-
 struct ContentView: View, DropDelegate {
-    @State var sources: [Source] = []
+    @ObservedObject var sourceList = FileList()
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     @State var filename: String = "output"
     @State var generateState: String = ""
     
-    //    var restingItems: [Source] { sources.filter { $0.removed == false } }
-    var count: Int { sources.count }
-    
-    var protectNumOnly: Bool { sources.filter { validate($0.length) }.count > 0 }
-    var protectEmpty: Bool { sources.filter { $0.length.isEmpty == true }.count > 0}
+    var protectNumOnly: Bool { sourceList.sources.filter { validate($0.length) }.count > 0 }
+    var protectEmpty: Bool { sourceList.sources.filter { $0.length.isEmpty == true }.count > 0 }
     
     func performDrop(info: DropInfo) -> Bool {
         for item in info.itemProviders(for: ["public.file-url"]) {
@@ -29,7 +23,7 @@ struct ContentView: View, DropDelegate {
                 if let data = urlData as? Data,
                    let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     if acceptableTypes.contains(url.pathExtension.lowercased()) {
-                        append(url, to: &self.sources)
+                        sourceList.append(url)
                     } else {
                         self.handleDirectoryURL(url)
                     }
@@ -45,23 +39,10 @@ struct ContentView: View, DropDelegate {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
             for dir in directoryContents {
                 if acceptableTypes.contains(dir.pathExtension.lowercased()) {
-                    append(dir, to: &self.sources)
+                    sourceList.append(dir)
                 }
             }
-        } catch {
-            
-        }
-    }
-    
-    func moveItem(dir: String, i: Source) {
-        let index = self.sources.firstIndex(of: i)!
-        let newIndex: Int = dir == "up" ? index - 1 : index + 1
-        
-        if newIndex >= 0 && newIndex < sources.count {
-            let temp = sources[index]
-            sources[index] = sources[newIndex]
-            sources[newIndex] = temp
-        }
+        } catch { }
     }
     
     var body: some View {
@@ -70,45 +51,45 @@ struct ContentView: View, DropDelegate {
                 VStack(alignment: .center) {
                     HStack{ Spacer() }
                     Button("Import Image(s)") {
-                        openDocument(&self.sources)
+                        openDocument(list: sourceList)
                     }
-                    ForEach(sources) { i in
+                    ForEach(sourceList.sources) { item in
                         HStack {
-                            // Image & Preview
-                            Image(nsImage: i.nsImage)
+                            // Preview Image
+                            Image(nsImage: item.nsImage)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 32, height: 32)
-                            Text(i.location.lastElement())
+                            Text(item.displayName)
                             
                             // TextField
                             TextField("seconds",
-                                      text: self.$sources[self.sources.firstIndex(of: i)!].length)
-                            Text(Int(i.length) ?? 2 == 1 ? "second" : "seconds")
-                            if validate(i.length) == false { Text("❌") }
+                                      text: Binding<String>(get: { item.length },
+                                                            set: { newValue in
+                                                                sourceList.edit(item, with: newValue)
+                                                            }))
+                            Text(Int(item.length) ?? 2 == 1 ? "second" : "seconds")
+                            if validate(item.length) == false { Text("❌") }
                             
                             // Controls
                             Button("✘") {
-                                let id = self.sources.firstIndex(of: i)!
-                                self.sources.remove(at: id)
+                                sourceList.remove(item)
                             }
                             Button("⬆") {
-                                self.moveItem(dir: "up", i: i)
+                                sourceList.move(item, dir: true)
                             }
-                            .disabled(i == self.sources.first!)
+                            .disabled(sourceList.isFirstItem(item))
                             Button("⬇") {
-                                self.moveItem(dir: "down", i: i)
+                                sourceList.move(item, dir: false)
                             }
-                            .disabled(i == self.sources.last!)
+                            .disabled(sourceList.isLastItem(item))
                         }
                         .frame(width: 460, height: 50)
                     }
                     // Clear list
-                    if count != 0 {
+                    if sourceList.count != 0 {
                         Button("Clear") {
-                            while !sources.isEmpty {
-                                sources.removeLast()
-                            }
+                            sourceList.removeAll()
                         }
                     }
                 }
@@ -137,14 +118,12 @@ struct ContentView: View, DropDelegate {
             
             HStack {
                 Button("Generate") {
-                    let items = self.sources
-                    
+                    let items = sourceList.sources
                     let success = generateGIF(from: items.map { $0.nsImage },
                                               delays: items.map { Double($0.length)! },
                                               docDirPath: self.outputPath,
                                               filename: "/\(formatFilename(self.filename)).gif"
                     )
-                    
                     self.generateState = success ? "✅" : "❌"
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
@@ -152,7 +131,7 @@ struct ContentView: View, DropDelegate {
                     }
                     
                 }
-                .disabled(count == 0 || !protectNumOnly || protectEmpty)
+                .disabled(sourceList.count == 0 || !protectNumOnly || protectEmpty)
                 Text(generateState)
             }
             .padding()
@@ -162,25 +141,6 @@ struct ContentView: View, DropDelegate {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        //        let listOfItems: [String] = [
-        //
-        //        ]
-        //
-        //        var sourceList = [Source]()
-        //
-        //        for (index, item) in listOfItems.enumerated() {
-        //
-        //            if let url = URL.init(string: item),
-        //                let image = NSImage.init(contentsOf: url) {
-        //                let newitem = Source.init(id: index,
-        //                                          location: item,
-        //                                          length: "1",
-        //                                          nsImage: image)
-        //                sourceList.append(newitem)
-        //            }
-        //        }
-        //
-        //        return ContentView(sources: sourceList)
         return ContentView()
     }
 }
