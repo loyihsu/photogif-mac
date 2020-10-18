@@ -11,7 +11,6 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
-    
     var window: NSWindow!
     var aboutWindow = NSWindow()
     
@@ -19,7 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
-        
         let contentView = ContentView()
         
         // Create the window and set the content view.
