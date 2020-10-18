@@ -8,15 +8,22 @@
 
 import Cocoa
 
-/// `Source` structure
-struct Source: Identifiable, Equatable {
-    var id = UUID()                 // Identifier for protocol `Identifiable`
+let acceptableTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
 
-    var location: String            // The file location.
-    var length: String              // The time the screen should stay in the output gif file.
+/**
+ The `Source` data structure.
+ - parameter `id`: The unique id for each item for `Identifiable`
+ - parameter `location`: The file location.
+ - parameter `length`: The time the screen should stay in the output gif file.
+ - parameter `displayName`: The name to display on screen.
+ - parameter `nsImage`: The `NSImage` object for the `Source` file.
+**/
+struct Source: Identifiable, Equatable {
+    var id = UUID()
+    var location: String
+    var length: String
     var displayName: String { location.lastElement().removingPercentEncoding ?? location.lastElement() }
-    
-    var nsImage: NSImage            // NSImage render.
+    var nsImage: NSImage
 }
 
 extension Array where Element == Source {
@@ -27,13 +34,13 @@ extension Array where Element == Source {
 }
 
 extension String {
-    /// Get the last non-empty element of the string (for path)
+    /// Get the last non-empty element of the string (for path).
     func lastElement() -> String {
         return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? "Image"
     }
 }
 
-/// Function to call the NSOpenPanel to select output path
+/// Function to call the NSOpenPanel to select output path.
 func selectPath() -> String? {
     let panel = NSOpenPanel()
     panel.canChooseDirectories = true
@@ -50,8 +57,8 @@ func selectPath() -> String? {
     return nil
 }
 
-/// Function to ouput document and append item into the `[source]`.
-/// - parameter sources: The `[Source]` array to append the items to. (pass by reference)
+/// Function to ouput document and append item into the `FileList`.
+/// - parameter list: The `FileList` containing the `[Source]` list.
 func openDocument(list: FileList) {
     let panel = NSOpenPanel()
 
@@ -65,10 +72,6 @@ func openDocument(list: FileList) {
         }
     }
 }
-
-/// Function to append item to `[Source]`.
-/// - parameter item: The `URL` of the item.
-/// - parameter sources: The `[Source]` array to append the items to. (pass by reference)
 
 /// Function to strip .gif at the end of output filename.
 func formatFilename(_ str: String) -> String {
