@@ -8,42 +8,15 @@
 
 import SwiftUI
 
-struct ContentView: View, DropDelegate {
-    @ObservedObject var sourceList = FileList()
+struct ContentView: View {
+    @ObservedObject var sourceList = FileList()     /// the `ViewModel`
+    
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     @State var filename: String = "output"
     @State var generateState: String = ""
     
     var protectNumOnly: Bool { sourceList.sources.filter { validate($0.length) }.count > 0 }
     var protectEmpty: Bool { sourceList.sources.filter { $0.length.isEmpty == true }.count > 0 }
-    
-    func performDrop(info: DropInfo) -> Bool {
-        for item in info.itemProviders(for: ["public.file-url"]) {
-            item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
-                if let data = urlData as? Data,
-                   let url = URL.init(dataRepresentation: data, relativeTo: nil) {
-                    if acceptableTypes.contains(url.pathExtension.lowercased()) {
-                        sourceList.append(url)
-                    } else {
-                        self.handleDirectoryURL(url)
-                    }
-                }
-            }
-        }
-        
-        return true
-    }
-    
-    func handleDirectoryURL(_ url: URL) {
-        do {
-            let directoryContents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
-            for dir in directoryContents {
-                if acceptableTypes.contains(dir.pathExtension.lowercased()) {
-                    sourceList.append(dir)
-                }
-            }
-        } catch { }
-    }
     
     var body: some View {
         VStack {
@@ -72,17 +45,9 @@ struct ContentView: View, DropDelegate {
                             if validate(item.length) == false { Text("❌") }
                             
                             // Controls
-                            Button("✘") {
-                                sourceList.remove(item)
-                            }
-                            Button("⬆") {
-                                sourceList.move(item, dir: true)
-                            }
-                            .disabled(sourceList.isFirstItem(item))
-                            Button("⬇") {
-                                sourceList.move(item, dir: false)
-                            }
-                            .disabled(sourceList.isLastItem(item))
+                            Button("✘") { sourceList.remove(item) }
+                            Button("⬆") { sourceList.move(item, dir: true) }.disabled(sourceList.isFirstItem(item))
+                            Button("⬇") { sourceList.move(item, dir: false) }.disabled(sourceList.isLastItem(item))
                         }
                         .frame(width: 460, height: 50)
                     }
