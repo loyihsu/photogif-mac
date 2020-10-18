@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF23F8D0253CA92E00977C39 /* Localizable.strings */; };
 		FF267AF424739B0E002241C0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF267AF62473A07E002241C0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF52473A07E002241C0 /* LICENSE */; };
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
@@ -21,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF23F8CC253CA7F500977C39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		FF23F8CF253CA92E00977C39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FF23F8D2253CA93100977C39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF267AF324739B0E002241C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FF267AF52473A07E002241C0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -82,10 +86,11 @@
 				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
 				FF8DC07E247076D400FCC99F /* Files.swift */,
 				FF800229253C8834005FCBF7 /* FileList.swift */,
-				FF4F6D1324711CB400CE308C /* Views */,
 				FFE9E981246F1339009DCC99 /* Generator.swift */,
+				FF4F6D1324711CB400CE308C /* Views */,
 				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
+				FF23F8D0253CA92E00977C39 /* Localizable.strings */,
 				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
 				FFE9E96C246EC7C6009DCC99 /* Products */,
 				FFE9E974246EC7CA009DCC99 /* Preview Content */,
@@ -143,6 +148,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = FFE9E962246EC7C6009DCC99;
 			productRefGroup = FFE9E96C246EC7C6009DCC99 /* Products */;
@@ -160,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */,
+				FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */,
 				FFE9E976246EC7CA009DCC99 /* Preview Assets.xcassets in Resources */,
 				FF267AF424739B0E002241C0 /* README.md in Resources */,
 				FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */,
@@ -186,10 +193,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		FF23F8D0253CA92E00977C39 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF23F8CF253CA92E00977C39 /* zh-Hant */,
+				FF23F8D2253CA93100977C39 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		FFE9E977246EC7CA009DCC99 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FFE9E978246EC7CA009DCC99 /* Base */,
+				FF23F8CC253CA7F500977C39 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -201,6 +218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -262,6 +280,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

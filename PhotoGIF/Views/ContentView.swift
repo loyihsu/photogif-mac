@@ -50,7 +50,7 @@ struct ContentView: View, DropDelegate {
             ScrollView(.vertical) {
                 VStack(alignment: .center) {
                     HStack{ Spacer() }
-                    Button("Import Image(s)") {
+                    Button(NSLocalizedString("import", comment: "Import Image(s) button.")) {
                         openDocument(list: sourceList)
                     }
                     ForEach(sourceList.sources) { item in
@@ -63,12 +63,12 @@ struct ContentView: View, DropDelegate {
                             Text(item.displayName)
                             
                             // TextField
-                            TextField("seconds",
+                            TextField(NSLocalizedString("seconds", comment: "second (plural)"),
                                       text: Binding<String>(get: { item.length },
                                                             set: { newValue in
                                                                 sourceList.edit(item, with: newValue)
                                                             }))
-                            Text(Int(item.length) ?? 2 == 1 ? "second" : "seconds")
+                            Text(Int(item.length) ?? 2 == 1 ? NSLocalizedString("second", comment: "second (singular)") : NSLocalizedString("seconds", comment: "second (plural)"))
                             if validate(item.length) == false { Text("❌") }
                             
                             // Controls
@@ -88,7 +88,7 @@ struct ContentView: View, DropDelegate {
                     }
                     // Clear list
                     if sourceList.count != 0 {
-                        Button("Clear") {
+                        Button(NSLocalizedString("Clear", comment: "Clear button to clear all imported images.")) {
                             sourceList.removeAll()
                         }
                     }
@@ -101,8 +101,8 @@ struct ContentView: View, DropDelegate {
             // Output and Generate Controls
             VStack {
                 HStack {
-                    Text("🗂 \(outputPath.lastElement())")
-                    Button("Change Output Path") {
+                    Text("🗂 \(outputPath.lastElement().removingPercentEncoding ?? outputPath.lastElement())")
+                    Button(NSLocalizedString("change", comment: "Button to change output paths.")) {
                         if let selected = selectPath() {
                             self.outputPath = selected
                         }
@@ -110,14 +110,14 @@ struct ContentView: View, DropDelegate {
                 }
                 
                 HStack {
-                    Text("Output Filename")
-                    TextField("Output Filename", text: $filename)
+                    Text(NSLocalizedString("filename", comment: "Label for output filename input."))
+                    TextField(NSLocalizedString("filename", comment: "Label for output filename input."), text: $filename)
                         .frame(width: 135, height: 12, alignment: .center)
                 }
             }
             
             HStack {
-                Button("Generate") {
+                Button(NSLocalizedString("generate", comment: "Button to generate output file.")) {
                     let items = sourceList.sources
                     let success = generateGIF(from: items.map { $0.nsImage },
                                               delays: items.map { Double($0.length)! },

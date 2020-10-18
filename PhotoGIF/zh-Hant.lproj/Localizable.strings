@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  PhotoGIF
+
+  Created by Loyi on 2020/10/19.
+  Copyright © 2020 Loyi Hsu. All rights reserved.
+*/
+
+"import" = "匯入圖片";
+"change" = "變更輸出路徑";
+"filename" = "輸出檔案名稱";
+"generate" = "生成";
+"second" = "秒";
+"seconds" = "秒";
+"Clear" = "清除全部";
