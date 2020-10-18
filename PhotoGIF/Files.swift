@@ -42,7 +42,8 @@ func selectPath() -> String? {
     let result = panel.runModal()
     if result == .OK {
         if let str = panel.url?.absoluteString {
-            return str.components(separatedBy: "file://").joined()
+            let path = str.components(separatedBy: "file://").joined()
+            return path.removingPercentEncoding ?? path
         }
     }
 

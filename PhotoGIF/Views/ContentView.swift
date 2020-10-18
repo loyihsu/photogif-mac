@@ -101,7 +101,7 @@ struct ContentView: View, DropDelegate {
             // Output and Generate Controls
             VStack {
                 HStack {
-                    Text("🗂 \(outputPath.lastElement().removingPercentEncoding ?? outputPath.lastElement())")
+                    Text("🗂 \(outputPath.lastElement())")
                     Button(NSLocalizedString("change", comment: "Button to change output paths.")) {
                         if let selected = selectPath() {
                             self.outputPath = selected
