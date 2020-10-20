@@ -46,7 +46,11 @@ struct ContentView: View {
                             Text(Int(item.length) ?? 2 == 1 ? NSLocalizedString("second", comment: "second (singular)") : NSLocalizedString("seconds", comment: "second (plural)"))
                             
                             // Controls
-                            Button("✘") { sourceList.remove(item) }
+                            Button("✘") {
+                                DispatchQueue.main.async {
+                                    sourceList.remove(item)
+                                }
+                            }
                             Button("⬆") { sourceList.move(item, dir: true) }.disabled(sourceList.isFirstItem(item))
                             Button("⬇") { sourceList.move(item, dir: false) }.disabled(sourceList.isLastItem(item))
                         }
