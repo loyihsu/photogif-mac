@@ -94,7 +94,16 @@ func showAlert(_ issue: String) -> Bool {
 /// Function to validate the seconds to show seconds.
 /// - parameter str: String to validate.
 func validate(_ str: String) -> Bool {
-    let output = str.filter { "0123456789.".contains($0) }
-    let count = str.filter { $0 == "." }.count
-    return str == output && count <= 1
+    return str.last != "."
+}
+
+func generateAcceptableOnly(_ str: String) -> String {
+    var s = str.components(separatedBy: ".")
+    if s.count > 1 {
+        var f = s.removeFirst() + "."
+        s.forEach { f += $0 }
+        return f.filter { "0123456789.".contains($0) }
+    } else {
+        return str.filter { "0123456789.".contains($0) }
+    }
 }

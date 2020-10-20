@@ -17,6 +17,7 @@ class FileList: ObservableObject {
     
     /// Default initialiser.
     init() { }
+
     /// Initialise with existing `[Source]`.
     /// - parameter sources: The existing `[Source]` to create `FileList`.
     init(sources: [Source]) { self.sources = sources }
