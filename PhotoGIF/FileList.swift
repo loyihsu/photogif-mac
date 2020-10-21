@@ -28,7 +28,9 @@ class FileList: ObservableObject {
         if acceptableTypes.contains(item.pathExtension.lowercased()) {
             if let image = NSImage.init(contentsOf: item) {
                 let str = item.absoluteString.components(separatedBy: "file://").joined()
-                sources.append(Source.init(location: str, length: "1", nsImage: image))
+                DispatchQueue.main.async {
+                    self.sources.append(Source.init(location: str, length: "1", nsImage: image))
+                }
                 return
             }
         }
@@ -42,14 +44,16 @@ class FileList: ObservableObject {
     /// - parameter dir: `true` = up, `false` = down
     func move(_ item: Source, dir: Bool) {
         guard let index = sources.firstIndex(of: item) else { return }
-        if dir == true && index >= 1 {
-            let temp = sources[index - 1]
-            sources[index - 1] = sources[index]
-            sources[index] = temp
-        } else if dir == false && index < count - 1 {
-            let temp = sources[index]
-            sources[index] = sources[index + 1]
-            sources[index + 1] = temp
+        DispatchQueue.main.async {
+            if dir == true && index >= 1 {
+                let temp = self.sources[index - 1]
+                self.sources[index - 1] = self.sources[index]
+                self.sources[index] = temp
+            } else if dir == false && index < self.count - 1 {
+                let temp = self.sources[index]
+                self.sources[index] = self.sources[index + 1]
+                self.sources[index + 1] = temp
+            }
         }
     }
     
@@ -57,7 +61,9 @@ class FileList: ObservableObject {
     /// - parameter item: The `Source ` item to be removed.
     func remove(_ item: Source) {
         guard let index = sources.firstIndex(of: item) else { return }
-        sources.remove(at: index)
+        DispatchQueue.main.async {
+            self.sources.remove(at: index)
+        }
     }
     
     /// The method to edit the `length` an item from the `sources` array.
@@ -65,12 +71,16 @@ class FileList: ObservableObject {
     /// - parameter with: The new value.
     func edit(_ item: Source, with newValue: String) {
         guard let index = sources.firstIndex(of: item) else { return }
-        sources[index].length = newValue
+        DispatchQueue.main.async {
+            self.sources[index].length = newValue
+        }
     }
     
     /// The method to remove all the items in the `sources` array.
     func removeAll() {
-        sources.removeAll()
+        DispatchQueue.main.async {
+            self.sources.removeAll()
+        }
     }
 
     /// Check whether the item is the first item in the `sources` array.

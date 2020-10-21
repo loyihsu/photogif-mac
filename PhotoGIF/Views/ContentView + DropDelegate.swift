@@ -15,9 +15,7 @@ extension ContentView: DropDelegate {
                 if let data = urlData as? Data,
                    let url = URL.init(dataRepresentation: data, relativeTo: nil) {
                     if acceptableTypes.contains(url.pathExtension.lowercased()) {
-                        DispatchQueue.main.async {
-                            sourceList.append(url)
-                        }
+                        sourceList.append(url)
                     } else {
                         self.handleDirectoryURL(url)
                     }

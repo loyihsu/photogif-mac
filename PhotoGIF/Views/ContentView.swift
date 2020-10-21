@@ -47,9 +47,7 @@ struct ContentView: View {
                             
                             // Controls
                             Button("✘") {
-                                DispatchQueue.main.async {
-                                    sourceList.remove(item)
-                                }
+                                sourceList.remove(item)
                             }
                             Button("⬆") { sourceList.move(item, dir: true) }.disabled(sourceList.isFirstItem(item))
                             Button("⬇") { sourceList.move(item, dir: false) }.disabled(sourceList.isLastItem(item))
