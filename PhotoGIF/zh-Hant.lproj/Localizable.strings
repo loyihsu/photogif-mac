@@ -7,7 +7,7 @@
 */
 
 "import" = "匯入圖片";
-"change" = "變更輸出路徑";
+"change" = "選擇輸出路徑";
 "filename" = "輸出檔案名稱";
 "generate" = "生成";
 "second" = "秒";
