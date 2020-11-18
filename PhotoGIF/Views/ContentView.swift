@@ -89,7 +89,7 @@ struct ContentView: View {
                     let items = sourceList.sources
                     let success = generateGIF(from: items.map { $0.nsImage },
                                               delays: items.map { Double($0.length)! },
-                                              docDirPath: self.outputPath,
+                                              path: self.outputPath,
                                               filename: "/\(formatFilename(self.filename)).gif")
                     self.generateState = success ? "✅" : "❌"
                     
