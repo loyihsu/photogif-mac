@@ -36,7 +36,7 @@ extension Array where Element == Source {
 extension String {
     /// Get the last non-empty element of the string (for path).
     func lastElement() -> String {
-        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? "Image"
+        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? NSLocalizedString("image", comment: "A fallback placeholder for images that we cannot find the last path element.")
     }
 }
 
