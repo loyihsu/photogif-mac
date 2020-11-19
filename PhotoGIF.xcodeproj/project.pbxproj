@@ -29,6 +29,8 @@
 		FF267AF324739B0E002241C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FF267AF52473A07E002241C0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		FF7ABBAE256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		FF7ABBAF256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FF800229253C8834005FCBF7 /* FileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		FFBBF866253CC20000D007C2 /* ContentView + DropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView + DropDelegate.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				en,
 				Base,
 				"zh-Hant",
+				"zh-Hans",
 			);
 			mainGroup = FFE9E962246EC7C6009DCC99;
 			productRefGroup = FFE9E96C246EC7C6009DCC99 /* Products */;
@@ -202,6 +205,7 @@
 			children = (
 				FF23F8CF253CA92E00977C39 /* zh-Hant */,
 				FF23F8D2253CA93100977C39 /* en */,
+				FF7ABBAF256698A400E1F143 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -211,6 +215,7 @@
 			children = (
 				FFE9E978246EC7CA009DCC99 /* Base */,
 				FF23F8CC253CA7F500977C39 /* zh-Hant */,
+				FF7ABBAE256698A400E1F143 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
