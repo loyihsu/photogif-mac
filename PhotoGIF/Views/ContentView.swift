@@ -56,7 +56,7 @@ struct ContentView: View {
                     }
                     // Clear list
                     if sourceList.count != 0 {
-                        Button(NSLocalizedString("Clear", comment: "Clear button to clear all imported images.")) {
+                        Button(NSLocalizedString("clear", comment: "Clear button to clear all imported images.")) {
                             sourceList.removeAll()
                         }
                     }

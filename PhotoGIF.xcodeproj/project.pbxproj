@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF23F8D0253CA92E00977C39 /* Localizable.strings */; };
-		FF267AF424739B0E002241C0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF267AF62473A07E002241C0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF52473A07E002241C0 /* LICENSE */; };
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
+		FF75A0E525669D57004FDD21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF80022A253C8834005FCBF7 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF800229253C8834005FCBF7 /* FileList.swift */; };
 		FF8DC07F247076D400FCC99F /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Files.swift */; };
 		FFBBF867253CC20000D007C2 /* ContentView + DropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBBF866253CC20000D007C2 /* ContentView + DropDelegate.swift */; };
@@ -171,10 +171,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF75A0E525669D57004FDD21 /* README.md in Resources */,
 				FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */,
 				FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */,
 				FFE9E976246EC7CA009DCC99 /* Preview Assets.xcassets in Resources */,
-				FF267AF424739B0E002241C0 /* README.md in Resources */,
 				FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */,
 				FF267AF62473A07E002241C0 /* LICENSE in Resources */,
 			);
