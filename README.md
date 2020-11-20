@@ -4,7 +4,7 @@
     <i>A photo to GIF tool built with Swift.</i>
     <br>
     <br>
-    <img src="https://img.shields.io/static/v1?label=Swift&message=5&color=orange"> <img src="https://img.shields.io/static/v1?label=Version&message=1.0&color=purple">
+    <img src="https://img.shields.io/static/v1?label=Swift&message=5&color=orange"> <img src="https://img.shields.io/static/v1?label=Version&message=1.1&color=purple">
 </div>
 
 ## How to use it?

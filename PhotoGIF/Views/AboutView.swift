@@ -19,12 +19,12 @@ struct AboutView: View {
             Image(nsImage: NSImage.init(named: "AppIcon")!)
                 .padding(.bottom)
             Text("\(getCFBundleString(for: "CFBundleName"))")
-                .font(.headline)
+                .font(.largeTitle)
                 .padding(8)
             Text("Ver. \(getCFBundleString(for: "CFBundleShortVersionString")) (\(getCFBundleString(for:"CFBundleVersion")))")
-                .font(.caption)
                 .padding(.bottom, 20)
             Text("\(getCFBundleString(for: "NSHumanReadableCopyright"))")
+                .font(.caption)
         }
         .frame(width: 450, height: 290, alignment: .center)
     }

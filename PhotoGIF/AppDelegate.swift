@@ -13,7 +13,6 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
     var aboutWindow = NSWindow()
-    
     var aboutWindowAppeared = false
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -69,4 +68,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
+
+//    /// An IBAction to open URL from NSMenuItem.
+//    @IBAction func openURL(_ sender: NSMenuItem) {
+//
+//    }
 }

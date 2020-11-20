@@ -9,29 +9,33 @@
 import ImageIO
 import Cocoa
 
-/// Function to generate GIF file.
-func generateGIF(from photos: [NSImage], delays: [Double], docDirPath: String, filename: String) -> Bool {
-    if photos.count < 1 { return false }
-    
-    let outputPath = docDirPath.appending(filename)
-    
+/// Function to generate GIF file from a list of `NSImage`, with delays specified with a list of Doubles.
+/// - parameter photos: An array of `NSImage` for the images to be used.
+/// - parameter delays: An array of `Double` that shows the delays.
+/// - parameter path: The path to the output position.
+/// - parameter filename: The filename for the output file.
+func generateGIF(from photos: [NSImage], delays: [Double], path: String, filename: String) -> Bool {
+    guard photos.count > 0 else { return false }
+
+    // Output
+    let outputPath = path.appending(filename)
+    let outputUrl = URL.init(fileURLWithPath: outputPath) as CFURL
+
     // Properties
-    let fileProp = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]
-    var gifProp = delays.map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
-    gifProp.insert(gifProp.popLast()!, at: 0)
-    
-    let cfURL = URL.init(fileURLWithPath: outputPath) as CFURL
-    
-    if let des = CGImageDestinationCreateWithURL(cfURL, kUTTypeGIF, photos.count, nil) {
-        CGImageDestinationSetProperties(des, fileProp as CFDictionary?)
-        
+    let imageProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]] as CFDictionary?
+    var gifProperties = delays.map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
+    gifProperties.insert(gifProperties.popLast()!, at: 0)
+
+    if let des = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, photos.count, nil) {
+        CGImageDestinationSetProperties(des, imageProperties)
         for (index, photo) in photos.enumerated() {
             var rect = CGRect.init(x:0, y:0, width: photo.size.width, height: photo.size.height)
             let image = photo.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
-            CGImageDestinationAddImage(des, image, gifProp[index] as CFDictionary?)
+            CGImageDestinationAddImage(des, image, gifProperties[index] as CFDictionary?)
         }
         return CGImageDestinationFinalize(des)
     }
-    
+
     return false
 }
+
