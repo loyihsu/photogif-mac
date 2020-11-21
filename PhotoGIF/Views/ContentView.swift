@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var filename: String = "output"
     @State var generateState: String = ""
 
-    var hasEmpty: Bool { sourceList.sources.filter { $0.length.isEmpty == true }.count > 0 }
+    var hasEmpty: Bool { sourceList.sources.contains { $0.length.isEmpty == true }}
     
     var body: some View {
         VStack {
@@ -40,7 +40,7 @@ struct ContentView: View {
                                                             set: { newValue in
                                                                 sourceList.edit(item, with: generateAcceptableOnly(newValue))
                                                             }))
-                            if !validate(item.length) {
+                            if !validate(item.length) || item.length.isEmpty {
                                 Text("❌")
                             }
                             Text(Int(item.length) ?? 2 == 1 ? NSLocalizedString("second", comment: "second (singular)") : NSLocalizedString("seconds", comment: "second (plural)"))
@@ -97,7 +97,7 @@ struct ContentView: View {
                         self.generateState = ""
                     }
                 }
-                .disabled(sourceList.count == 0 || hasEmpty || sourceList.sources.filter { !validate($0.length) }.count != 0 )
+                .disabled(sourceList.count == 0 || hasEmpty || sourceList.sources.contains { !validate($0.length) } )
                 Text(generateState)
             }
             .padding()
