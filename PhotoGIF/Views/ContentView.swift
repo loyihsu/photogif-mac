@@ -9,20 +9,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var sourceList = FileList()
+    @StateObject var sourceList = FileList()
     
     @State var outputPath: String = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0]
     @State var filename: String = "output"
     @State var generateState: String = ""
 
     var hasEmpty: Bool { sourceList.sources.contains { $0.length.isEmpty == true }}
-    
+
     var body: some View {
         VStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center) {
                     HStack{ Spacer() }
-                    Button(NSLocalizedString("import", comment: "Import Image(s) button.")) {
+                    Button(LocalizedStringKey("import")) {
                         openDocument(list: sourceList)
                     }
                     ForEach(sourceList.sources) { item in
@@ -35,7 +35,7 @@ struct ContentView: View {
                             Text(item.displayName)
                             
                             // TextField
-                            TextField(NSLocalizedString("seconds", comment: "second (plural)"),
+                            TextField(LocalizedStringKey("seconds"),
                                       text: Binding<String>(get: { item.length },
                                                             set: { newValue in
                                                                 sourceList.edit(item, with: generateAcceptableOnly(newValue))
@@ -43,20 +43,20 @@ struct ContentView: View {
                             if !validate(item.length) || item.length.isEmpty {
                                 Text("❌")
                             }
-                            Text(Int(item.length) ?? 2 == 1 ? NSLocalizedString("second", comment: "second (singular)") : NSLocalizedString("seconds", comment: "second (plural)"))
+                            Text(Int(item.length) ?? 2 == 1 ? LocalizedStringKey("second") : LocalizedStringKey("seconds"))
                             
                             // Controls
                             Button("✘") {
                                 sourceList.remove(item)
                             }
-                            Button("⬆") { sourceList.move(item, dir: true) }.disabled(sourceList.isFirstItem(item))
-                            Button("⬇") { sourceList.move(item, dir: false) }.disabled(sourceList.isLastItem(item))
+                            Button("⬆") { sourceList.move(item, dir: .up) }.disabled(sourceList.isFirstItem(item))
+                            Button("⬇") { sourceList.move(item, dir: .down) }.disabled(sourceList.isLastItem(item))
                         }
                         .frame(width: 460, height: 50)
                     }
                     // Clear list
                     if sourceList.count != 0 {
-                        Button(NSLocalizedString("clear", comment: "Clear button to clear all imported images.")) {
+                        Button(LocalizedStringKey("clear")) {
                             sourceList.removeAll()
                         }
                     }
@@ -70,7 +70,7 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Text("🗂 \(outputPath.lastElement())")
-                    Button(NSLocalizedString("change", comment: "Button to change output paths.")) {
+                    Button(LocalizedStringKey("change")) {
                         if let selected = selectPath() {
                             self.outputPath = selected
                         }
@@ -78,14 +78,14 @@ struct ContentView: View {
                 }
                 
                 HStack {
-                    Text(NSLocalizedString("filename", comment: "Label for output filename input."))
-                    TextField(NSLocalizedString("filename", comment: "Label for output filename input."), text: $filename)
+                    Text(LocalizedStringKey("filename"))
+                    TextField(LocalizedStringKey("filename"), text: $filename)
                         .frame(width: 135, height: 12, alignment: .center)
                 }
             }
             
             HStack {
-                Button(NSLocalizedString("generate", comment: "Button to generate output file.")) {
+                Button(LocalizedStringKey("generate")) {
                     let items = sourceList.sources
                     let success = generateGIF(from: items.map { $0.nsImage },
                                               delays: items.map { Double($0.length)! },

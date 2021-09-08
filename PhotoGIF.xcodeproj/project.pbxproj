@@ -56,14 +56,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FF4903FA26E88E3200FEE2FD /* Generator */ = {
+		FF4903FA26E88E3200FEE2FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				FF8DC07E247076D400FCC99F /* Files.swift */,
-				FF800229253C8834005FCBF7 /* FileList.swift */,
 				FFE9E981246F1339009DCC99 /* Generator.swift */,
 			);
-			path = Generator;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FF4903FB26E88FAB00FEE2FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FF800229253C8834005FCBF7 /* FileList.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FF4903FC26E8918F00FEE2FD /* Localisations */ = {
+			isa = PBXGroup;
+			children = (
+				FF23F8D0253CA92E00977C39 /* Localizable.strings */,
+			);
+			path = Localisations;
 			sourceTree = "<group>";
 		};
 		FF4F6D1324711CB400CE308C /* Views */ = {
@@ -98,12 +113,13 @@
 		FFE9E96D246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXGroup;
 			children = (
+				FF4903FC26E8918F00FEE2FD /* Localisations */,
 				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-				FF4903FA26E88E3200FEE2FD /* Generator */,
+				FF4903FA26E88E3200FEE2FD /* Model */,
+				FF4903FB26E88FAB00FEE2FD /* ViewModel */,
 				FF4F6D1324711CB400CE308C /* Views */,
 				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
-				FF23F8D0253CA92E00977C39 /* Localizable.strings */,
 				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
 				FFE9E96C246EC7C6009DCC99 /* Products */,
 				FFE9E974246EC7CA009DCC99 /* Preview Content */,

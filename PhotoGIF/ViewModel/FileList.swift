@@ -38,20 +38,20 @@ class FileList: ObservableObject {
         let _ = showAlert("\(item.absoluteString.lastElement()) cannot be recognised.")
         // Reachable when it is not recognised or NSImage can't be constructed.
     }
-    
+
+    enum MoveDirection {
+        case up, down
+    }
+
     /// The method to move the item within the `sources` array.
     /// - parameter item: The `Source` item to be moved.
     /// - parameter dir: `true` = up, `false` = down
-    func move(_ item: Source, dir: Bool) {
+    func move(_ item: Source, dir: MoveDirection) {
         guard let idx = sources.firstIndex(of: item) else { return }
         DispatchQueue.main.async { [self] in
-            if dir == true && idx >= 1 {
-                (sources[idx-1], sources[idx]) = (sources[idx], sources[idx - 1])
-            } else if dir == false && index < self.count - 1 {
-                let temp = self.sources[index]
-                self.sources[index] = self.sources[index + 1]
-                self.sources[index + 1] = temp
-            }
+            let left = dir == .up && idx >= 1 ? idx - 1 : idx
+            let right = dir == .up && idx >= 1 ? idx : idx + 1
+            (sources[left], sources[right]) = (sources[right], sources[left])
         }
     }
     
