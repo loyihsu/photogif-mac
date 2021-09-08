@@ -68,9 +68,4 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-
-//    /// An IBAction to open URL from NSMenuItem.
-//    @IBAction func openURL(_ sender: NSMenuItem) {
-//
-//    }
 }

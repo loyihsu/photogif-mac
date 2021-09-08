@@ -8,6 +8,8 @@
 
 import Cocoa
 
+// MARK: - Representations
+
 let acceptableTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
 
 /**
@@ -36,9 +38,11 @@ extension Array where Element == Source {
 extension String {
     /// Get the last non-empty element of the string (for path).
     func lastElement() -> String {
-        return self.components(separatedBy: "/").filter { $0.isEmpty == false }.last ?? NSLocalizedString("image", comment: "A fallback placeholder for images that we cannot find the last path element.")
+        return self.components(separatedBy: "/").filter({ $0.isEmpty == false }).last ?? NSLocalizedString("image", comment: "A fallback placeholder for images that we cannot find the last path element.")
     }
 }
+
+// MARK: - Document Handlers
 
 /// Function to call the NSOpenPanel to select output path.
 func selectPath() -> String? {
@@ -78,6 +82,9 @@ func formatFilename(_ str: String) -> String {
     return str.components(separatedBy: ".gif").joined()
 }
 
+
+// MARK: Validators
+
 /// Function to show alert.
 /// `issue`: Alert message.
 func showAlert(_ issue: String) -> Bool {
@@ -91,19 +98,24 @@ func showAlert(_ issue: String) -> Bool {
     return false
 }
 
-/// Function to validate the seconds to show seconds.
+/// Function to validate the seconds.
 /// - parameter str: String to validate.
 func validate(_ str: String) -> Bool {
     return str.last != "."
 }
 
+/// This method removes all the floating points after the first one.
 func generateAcceptableOnly(_ str: String) -> String {
-    var s = str.components(separatedBy: ".")
-    if s.count > 1 {
-        var f = s.removeFirst() + "."
-        s.forEach { f += $0 }
-        return f.filter { "0123456789.".contains($0) }
-    } else {
-        return str.filter { "0123456789.".contains($0) }
+    var split = str.components(separatedBy: ".")
+    if split.count > 1 {
+        var first = split.removeFirst() + "." // The part before the floating point.
+        split.forEach {
+            // Adding all the items after the first one (after the floating point, without the floating points)
+            // - Points are removed at the initial split
+            // - The first item (before the floating point) is removed at the removeFirst().
+            first += $0
+        }
+        return first.filter({ "0123456789.".contains($0) })
     }
+    return str.filter({ "0123456789.".contains($0) })
 }

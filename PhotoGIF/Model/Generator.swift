@@ -19,12 +19,12 @@ func generateGIF(from photos: [NSImage], delays: [Double], path: String, filenam
 
     // Output
     let outputPath = path.appending(filename)
-    let outputUrl = URL.init(fileURLWithPath: outputPath) as CFURL
+    let outputUrl = URL(fileURLWithPath: outputPath) as CFURL
 
     // Properties
     let imageProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]] as CFDictionary?
-    var gifProperties = delays.map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
-    gifProperties.insert(gifProperties.popLast()!, at: 0)
+    var gifProperties = delays.map({ [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] })
+    gifProperties = [gifProperties.last!] + gifProperties[0..<gifProperties.index(before: gifProperties.endIndex)]
 
     if let des = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, photos.count, nil) {
         CGImageDestinationSetProperties(des, imageProperties)
