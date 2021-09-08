@@ -29,7 +29,7 @@ class FileList: ObservableObject {
             if let image = NSImage.init(contentsOf: item) {
                 let str = item.absoluteString.components(separatedBy: "file://").joined()
                 DispatchQueue.main.async {
-                    self.sources.append(Source.init(location: str, length: "1", nsImage: image))
+                    self.sources.append(Source(location: str, length: "1", nsImage: image))
                 }
                 return
             }
@@ -43,12 +43,10 @@ class FileList: ObservableObject {
     /// - parameter item: The `Source` item to be moved.
     /// - parameter dir: `true` = up, `false` = down
     func move(_ item: Source, dir: Bool) {
-        guard let index = sources.firstIndex(of: item) else { return }
-        DispatchQueue.main.async {
-            if dir == true && index >= 1 {
-                let temp = self.sources[index - 1]
-                self.sources[index - 1] = self.sources[index]
-                self.sources[index] = temp
+        guard let idx = sources.firstIndex(of: item) else { return }
+        DispatchQueue.main.async { [self] in
+            if dir == true && idx >= 1 {
+                (sources[idx-1], sources[idx]) = (sources[idx], sources[idx - 1])
             } else if dir == false && index < self.count - 1 {
                 let temp = self.sources[index]
                 self.sources[index] = self.sources[index + 1]
