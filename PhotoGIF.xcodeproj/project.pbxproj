@@ -56,6 +56,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF4903FA26E88E3200FEE2FD /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				FF8DC07E247076D400FCC99F /* Files.swift */,
+				FF800229253C8834005FCBF7 /* FileList.swift */,
+				FFE9E981246F1339009DCC99 /* Generator.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
 		FF4F6D1324711CB400CE308C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,9 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-				FF8DC07E247076D400FCC99F /* Files.swift */,
-				FF800229253C8834005FCBF7 /* FileList.swift */,
-				FFE9E981246F1339009DCC99 /* Generator.swift */,
+				FF4903FA26E88E3200FEE2FD /* Generator */,
 				FF4F6D1324711CB400CE308C /* Views */,
 				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
