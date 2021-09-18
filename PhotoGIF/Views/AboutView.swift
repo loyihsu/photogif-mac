@@ -16,7 +16,7 @@ struct AboutView: View {
 
     var body: some View {
         VStack {
-            Image(nsImage: NSImage.init(named: "AppIcon")!)
+            Image(nsImage: NSImage(named: "AppIcon")!)
                 .padding(.bottom)
             Text("\(getCFBundleString(for: "CFBundleName"))")
                 .font(.largeTitle)

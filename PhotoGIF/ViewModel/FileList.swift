@@ -26,7 +26,7 @@ class FileList: ObservableObject {
     /// - parameter item: The `URL` of the image to append to the `sources` array.
     func append(_ item: URL) {
         if acceptableTypes.contains(item.pathExtension.lowercased()) {
-            if let image = NSImage.init(contentsOf: item) {
+            if let image = NSImage(contentsOf: item) {
                 let str = item.absoluteString.components(separatedBy: "file://").joined()
                 DispatchQueue.main.async {
                     self.sources.append(Source(location: str, length: "1", nsImage: image))

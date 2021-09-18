@@ -29,7 +29,7 @@ func generateGIF(from photos: [NSImage], delays: [Double], path: String, filenam
     if let des = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, photos.count, nil) {
         CGImageDestinationSetProperties(des, imageProperties)
         for (index, photo) in photos.enumerated() {
-            var rect = CGRect.init(x:0, y:0, width: photo.size.width, height: photo.size.height)
+            var rect = CGRect(x:0, y:0, width: photo.size.width, height: photo.size.height)
             let image = photo.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
             CGImageDestinationAddImage(des, image, gifProperties[index] as CFDictionary?)
         }

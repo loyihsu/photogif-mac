@@ -13,7 +13,7 @@ extension ContentView: DropDelegate {
         for item in info.itemProviders(for: ["public.file-url"]) {
             item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
                 if let data = urlData as? Data,
-                   let url = URL.init(dataRepresentation: data, relativeTo: nil) {
+                   let url = URL(dataRepresentation: data, relativeTo: nil) {
                     if acceptableTypes.contains(url.pathExtension.lowercased()) {
                         sourceList.append(url)
                     } else {
