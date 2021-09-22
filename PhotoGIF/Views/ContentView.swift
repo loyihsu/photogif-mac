@@ -19,54 +19,70 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            ScrollView(.vertical) {
-                VStack(alignment: .center) {
-                    HStack{ Spacer() }
-                    Button(LocalizedStringKey("import")) {
-                        openDocument(list: sourceList)
-                    }
-                    ForEach(sourceList.sources) { item in
-                        HStack {
-                            // Preview Image
-                            Image(nsImage: item.nsImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                            Text(item.displayName)
-                            
-                            // TextField
-                            TextField(LocalizedStringKey("seconds"),
-                                      text: Binding<String>(get: { item.length },
-                                                            set: { newValue in
-                                                                sourceList.edit(item, with: generateAcceptableOnly(newValue))
-                                                            }))
-                            if !validate(item.length) || item.length.isEmpty {
-                                Text("❌")
-                            }
-                            Text(Int(item.length) ?? 2 == 1 ? LocalizedStringKey("second") : LocalizedStringKey("seconds"))
-                            
-                            // Controls
-                            Button("✘") {
-                                sourceList.remove(item)
-                            }
-                            Button("⬆") { sourceList.move(item, dir: .up) }.disabled(sourceList.isFirstItem(item))
-                            Button("⬇") { sourceList.move(item, dir: .down) }.disabled(sourceList.isLastItem(item))
+            imageList()
+            controls()
+        }
+    }
+
+    private func imageList() -> some View {
+        ScrollView(.vertical) {
+            VStack(alignment: .center) {
+                Spacer()
+                Button(LocalizedStringKey("import")) {
+                    openDocument(list: sourceList)
+                }
+                ForEach(sourceList.sources) { item in
+                    HStack {
+                        // Preview Image
+                        Image(nsImage: item.nsImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 32)
+                        Text(item.displayName)
+
+                        // TextField
+                        TextField(LocalizedStringKey("seconds"),
+                                  text: Binding<String>(get: { item.length },
+                                                        set: { newValue in
+                                                            sourceList.edit(item, with: generateAcceptableOnly(newValue))
+                                                        }))
+                        if !validate(item.length) || item.length.isEmpty {
+                            Text("❌")
                         }
-                        .frame(width: 460, height: 50)
-                    }
-                    // Clear list
-                    if sourceList.count != 0 {
-                        Button(LocalizedStringKey("clear")) {
-                            sourceList.removeAll()
+                        Text(Int(item.length) ?? 2 == 1 ? LocalizedStringKey("second") : LocalizedStringKey("seconds"))
+
+                        // Controls
+                        Button("✘") {
+                            sourceList.remove(item)
                         }
+                        Button("⬆") {
+                            sourceList.move(item, dir: .up)
+                        }
+                        .disabled(sourceList.isFirstItem(item))
+                        Button("⬇") {
+                            sourceList.move(item, dir: .down)
+                        }
+                        .disabled(sourceList.isLastItem(item))
+                    }
+                    .frame(width: 460, height: 50)
+                }
+                // Clear list
+                if sourceList.count != 0 {
+                    Button(LocalizedStringKey("clear")) {
+                        sourceList.removeAll()
                     }
                 }
             }
-            .onDrop(of: ["public.file-url"], delegate: self)
-            .frame(width: 480, height: 360, alignment: .topLeading)
-            .padding()
-            
-            // Output and Generate Controls
+            .frame(width: listWidth)
+        }
+        .onDrop(of: ["public.file-url"], delegate: self)
+        .frame(width: listWidth, height: listHeight, alignment: .topLeading)
+        .padding()
+    }
+
+    private func controls() -> some View {
+        // Output and Generate Controls
+        Group {
             VStack {
                 HStack {
                     Text("🗂 \(outputPath.lastElement())")
@@ -76,14 +92,14 @@ struct ContentView: View {
                         }
                     }
                 }
-                
+
                 HStack {
                     Text(LocalizedStringKey("filename"))
                     TextField(LocalizedStringKey("filename"), text: $filename)
                         .frame(width: 135, height: 12, alignment: .center)
                 }
             }
-            
+
             HStack {
                 Button(LocalizedStringKey("generate")) {
                     let items = sourceList.sources
@@ -92,7 +108,7 @@ struct ContentView: View {
                                               path: self.outputPath,
                                               filename: "/\(formatFilename(self.filename)).gif")
                     self.generateState = success ? "✅" : "❌"
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                         self.generateState = ""
                     }
@@ -103,6 +119,11 @@ struct ContentView: View {
             .padding()
         }
     }
+
+    // MARK: - Drawing Constants
+    let listWidth: CGFloat = 480
+    let listHeight: CGFloat = 360
+
 }
 
 struct ContentView_Previews: PreviewProvider {
