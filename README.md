@@ -14,10 +14,6 @@
 * Choose your output path.
 * Hit `Generate` and you are good to go ✅.
 
-## Download
-
-The app is now available for download in the [Mac App Store](https://apps.apple.com/app/photogif/id1541259249?l=en&mt=12)!
-
 ## Screenshots
 
 ![Screenshot](https://github.com/loyihsu/photogif-mac/blob/main/demo/screenshot.png?raw=true)
