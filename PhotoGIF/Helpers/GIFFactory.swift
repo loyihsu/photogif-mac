@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 protocol GIFFactory {
     /// Generate a GIF image, with delays specified with a list of Doubles.
@@ -35,7 +36,7 @@ struct DefaultGIFFactory: GIFFactory {
         let gifProperties = sources.map(\.length)
             .map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
 
-        guard let destination = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, sources.count, nil) else {
+        guard let destination = CGImageDestinationCreateWithURL(outputUrl, UTType.gif.identifier as CFString, sources.count, nil) else {
             return false
         }
 

@@ -71,8 +71,6 @@ struct FileList: Equatable {
     // MARK: - Private Helpers
 
     private mutating func appendSource(_ item: URL) {
-        guard Source.supportedTypes.contains(item.pathExtension.lowercased()) else { return }
-
         guard let image = NSImage(contentsOf: item) else { return }
 
         let path = item.absoluteString.components(separatedBy: "file://").joined()

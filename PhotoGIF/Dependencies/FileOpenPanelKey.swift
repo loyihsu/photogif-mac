@@ -24,7 +24,7 @@ extension DependencyValues {
             let panel = NSOpenPanel()
 
             panel.allowsMultipleSelection = true
-            panel.allowedFileTypes = Source.supportedTypes
+            panel.allowedContentTypes = Source.supportedTypes
 
             let result = panel.runModal()
 

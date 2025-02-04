@@ -7,12 +7,13 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 /**
   The representation of imported images.
  */
 struct Source: Identifiable, Equatable {
-    static let supportedTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
+    static let supportedTypes: [UTType] = [.jpeg, .png, .bmp, .tiff, .heic]
 
     var id = UUID()
     var location: String
