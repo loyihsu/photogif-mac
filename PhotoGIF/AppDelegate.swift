@@ -6,6 +6,7 @@
 //  Copyright © 2020 Loyi Hsu. All rights reserved.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 @main
@@ -17,7 +18,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView(
+            store: StoreOf<ContentFeature>(
+                initialState: ContentFeature.State(),
+                reducer: {
+                    ContentFeature()
+                }
+            )
+        )
 
         // Create the window and set the content view.
         self.window = NSWindow(

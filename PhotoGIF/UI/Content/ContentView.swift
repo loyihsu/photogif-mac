@@ -6,15 +6,18 @@
 //  Copyright © 2020 Loyi Hsu. All rights reserved.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = ContentViewModel()
+    @Perception.Bindable var store: StoreOf<ContentFeature>
 
     var body: some View {
-        VStack {
-            self.imageList()
-            self.controls()
+        WithPerceptionTracking {
+            VStack {
+                self.imageList()
+                self.controls()
+            }
         }
     }
 
@@ -23,9 +26,9 @@ struct ContentView: View {
             VStack(alignment: .center) {
                 Spacer()
                 Button(LocalizedStringKey("import")) {
-                    self.viewModel.openDocument()
+                    self.store.send(.openDocument)
                 }
-                ForEach(self.viewModel.sources) { item in
+                ForEach(self.store.fileList.sources) { item in
                     HStack {
                         // Preview Image
                         Image(nsImage: item.nsImage)
@@ -40,7 +43,9 @@ struct ContentView: View {
                             LocalizedStringKey("seconds"),
                             text: Binding(
                                 get: { item.length },
-                                set: { self.viewModel.edit(item, with: $0) }
+                                set: {
+                                    self.store.send(.edit(item: item, value: $0))
+                                }
                             )
                         )
 
@@ -55,25 +60,25 @@ struct ContentView: View {
                         )
 
                         Button("✘") {
-                            self.viewModel.remove(item)
+                            self.store.send(.remove(item: item))
                         }
                         Button("⬆") {
-                            self.viewModel.moveUp(item)
+                            self.store.send(.moveUp(item: item))
                         }
-                        .disabled(self.viewModel.isFirstSource(item))
+                        .disabled(self.store.fileList.isFirstSource(item))
 
                         Button("⬇") {
-                            self.viewModel.moveDown(item)
+                            self.store.send(.moveDown(item: item))
                         }
-                        .disabled(self.viewModel.isLastSource(item))
+                        .disabled(self.store.fileList.isLastSource(item))
                     }
                     .frame(width: 460, height: 50)
                 }
 
                 // Clear list
-                if !self.viewModel.sources.isEmpty {
+                if !self.store.fileList.sources.isEmpty {
                     Button(LocalizedStringKey("clear")) {
-                        self.viewModel.removeAllSources()
+                        self.store.send(.removeAllSources)
                     }
                 }
             }
@@ -88,25 +93,28 @@ struct ContentView: View {
         Group {
             VStack {
                 HStack {
-                    Text("🗂 \(self.viewModel.displayOutputPath)")
+                    Text("🗂 \(self.store.displayOutputPath)")
                     Button(LocalizedStringKey("change")) {
-                        self.viewModel.selectPath()
+                        self.store.send(.selectPath)
                     }
                 }
 
                 HStack {
                     Text(LocalizedStringKey("filename"))
-                    TextField(LocalizedStringKey("filename"), text: self.$viewModel.filename)
-                        .frame(width: 135, height: 12, alignment: .center)
+                    TextField(
+                        LocalizedStringKey("filename"),
+                        text: self.$store.outputFilename
+                    )
+                    .frame(width: 135, height: 12, alignment: .center)
                 }
             }
 
             HStack {
                 Button(LocalizedStringKey("generate")) {
-                    self.viewModel.generate()
+                    self.store.send(.generate)
                 }
-                .disabled(!self.viewModel.canGenerate)
-                Text(self.viewModel.generateState?.string ?? "")
+                .disabled(!self.store.canGenerate)
+                Text(self.store.generationState?.string ?? "")
             }
             .padding()
         }
@@ -121,7 +129,7 @@ extension ContentView: DropDelegate {
                    let url = URL(dataRepresentation: data, relativeTo: nil)
                 {
                     if Source.supportedTypes.contains(url.pathExtension.lowercased()) {
-                        self.viewModel.appendSource(url)
+                        self.store.send(.filesSelected(urls: [url]))
                     } else {
                         self.handleDirectoryURL(url)
                     }
@@ -132,16 +140,39 @@ extension ContentView: DropDelegate {
     }
 
     func handleDirectoryURL(_ url: URL) {
-        if let directoryContents = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) {
-            for dir in directoryContents where Source.supportedTypes.contains(dir.pathExtension.lowercased()) {
-                viewModel.appendSource(dir)
+        guard let directoryContents = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) else { return }
+
+        let urls = directoryContents
+            .filter {
+                Source.supportedTypes.contains($0.pathExtension.lowercased())
             }
+
+        self.store.send(.filesSelected(urls: urls))
+    }
+}
+
+private extension ContentFeature.State.GenerationState {
+    var string: String {
+        switch self {
+        case .success:
+            return "✅"
+        case .failure:
+            return "❌"
+        case .loading:
+            return "🏃‍♀️"
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        return ContentView()
+        return ContentView(
+            store: StoreOf<ContentFeature>(
+                initialState: ContentFeature.State(),
+                reducer: {
+                    ContentFeature()
+                }
+            )
+        )
     }
 }

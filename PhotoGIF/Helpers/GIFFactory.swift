@@ -25,8 +25,10 @@ struct DefaultGIFFactory: GIFFactory {
     func make(with sources: [Source], path: String, filename: String) -> Bool {
         guard sources.count > 0 else { return false }
 
+        let filename = filename.hasPrefix("/") ? filename : "/\(filename)"
+
         let outputPath = path.appending(filename)
-        let outputUrl = URL(fileURLWithPath: path) as CFURL
+        let outputUrl = URL(fileURLWithPath: outputPath) as CFURL
 
         let imageProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]] as CFDictionary?
 
