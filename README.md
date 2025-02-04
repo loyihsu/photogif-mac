@@ -10,7 +10,7 @@
 ## How to use it?
 
 * Import the images (drag and drop into the window supported).
-* Setup the time (in seconds) it should stay on screen.
+* Set up the time (in seconds) it should stay on screen.
 * Choose your output path.
 * Hit `Generate` and you are good to go ✅.
 
@@ -21,11 +21,11 @@
 
 ## Requirements
 
-This app uses SwiftUI, so it requires macOS Catalina (v10.15) above to run.
+This app requires macOS v11.5 or above to run.
 
 ## Contributions
 
-As this is a young project, some bugs and missing features here and there are expected.  This project does not support GitHub issues. If you want to make any changes or contributions, Pull Requests are welcome.
+As this is a young project, some bugs and missing features here and there are expected.  This project does not support GitHub issues. If you want to make any changes or contributions, pull requests are welcome.
 
 ## License
 
