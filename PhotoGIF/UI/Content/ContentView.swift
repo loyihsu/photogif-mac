@@ -58,12 +58,12 @@ struct ContentView: View {
                             self.viewModel.remove(item)
                         }
                         Button("⬆") {
-                            self.viewModel.move(item, dir: .up)
+                            self.viewModel.moveUp(item)
                         }
                         .disabled(self.viewModel.isFirstSource(item))
 
                         Button("⬇") {
-                            self.viewModel.move(item, dir: .down)
+                            self.viewModel.moveDown(item)
                         }
                         .disabled(self.viewModel.isLastSource(item))
                     }

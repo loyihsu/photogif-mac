@@ -10,11 +10,6 @@ import Cocoa
 
 class ContentViewModel: ObservableObject {
     // MARK: - Models
-
-    enum MoveDirection {
-        case up, down
-    }
-
     enum GenerateState {
         case success
         case failure
@@ -96,14 +91,31 @@ class ContentViewModel: ObservableObject {
             self.sources.removeAll()
         }
     }
-
-    /// The method to move the item within the `sources` array.
-    /// - parameter item: The `Source` item to be moved.
-    func move(_ item: Source, dir: MoveDirection) {
+    
+    func moveUp(_ item: Source) {
         guard let idx = sources.firstIndex(of: item) else { return }
+
+        guard idx != 0 else { return }
+
+        // TODO: Use async-await
+
         DispatchQueue.main.async { [self] in
-            let left = dir == .up && idx >= 1 ? idx - 1 : idx
-            let right = dir == .up && idx >= 1 ? idx : idx + 1
+            let left = idx - 1
+            let right = idx
+            (self.sources[left], self.sources[right]) = (self.sources[right], self.sources[left])
+        }
+    }
+
+    func moveDown(_ item: Source) {
+        guard let idx = sources.firstIndex(of: item) else { return }
+
+        guard idx + 1 < self.sources.count else { return }
+
+        // TODO: Use async-await
+
+        DispatchQueue.main.async { [self] in
+            let left = idx
+            let right = idx + 1
             (self.sources[left], self.sources[right]) = (self.sources[right], self.sources[left])
         }
     }
