@@ -201,29 +201,27 @@ private extension [Source] {
     func generateGIF(path: String, filename: String) -> Bool {
         guard self.count > 0 else { return false }
 
-        // Output
         let outputPath = path.appending(filename)
         let outputUrl = URL(fileURLWithPath: outputPath) as CFURL
 
-        // Properties
         let imageProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]] as CFDictionary?
-        var gifProperties = self.map(\.length)
+
+        let gifProperties = self.map(\.length)
             .map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
-        gifProperties = [gifProperties.last!] + gifProperties[0 ..< gifProperties.index(before: gifProperties.endIndex)]
 
-        if let des = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, self.count, nil) {
-            CGImageDestinationSetProperties(des, imageProperties)
-
-            for (index, image) in self.enumerated() {
-                let nsImage = image.nsImage
-                var rect = CGRect(x: 0, y: 0, width: nsImage.size.width, height: nsImage.size.height)
-                let image = nsImage.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
-                CGImageDestinationAddImage(des, image, gifProperties[index] as CFDictionary?)
-            }
-
-            return CGImageDestinationFinalize(des)
+        guard let destination = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, self.count, nil) else {
+            return false
         }
 
-        return false
+        CGImageDestinationSetProperties(destination, imageProperties)
+
+        for (index, image) in self.enumerated() {
+            let nsImage = image.nsImage
+            var rect = CGRect(x: 0, y: 0, width: nsImage.size.width, height: nsImage.size.height)
+            let image = nsImage.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
+            CGImageDestinationAddImage(destination, image, gifProperties[index] as CFDictionary?)
+        }
+
+        return CGImageDestinationFinalize(destination)
     }
 }
