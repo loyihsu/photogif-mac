@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,16 @@
 		FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E977246EC7CA009DCC99 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FFE941862D524BBD008D9718 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFE9E963246EC7C6009DCC99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFE9E96A246EC7C6009DCC99;
+			remoteInfo = PhotoGIF;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		FF1C1F062D5221E70011E5C3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		FF23F8CC253CA7F500977C39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -33,6 +43,7 @@
 		FF7ABBAF256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FF800229253C8834005FCBF7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		FFE941822D524BBD008D9718 /* PhotoGIFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoGIFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE9E970246EC7C6009DCC99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,7 +54,18 @@
 		FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoGIF.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FFE941832D524BBD008D9718 /* PhotoGIFTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PhotoGIFTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		FFE9417F2D524BBD008D9718 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFE9E968246EC7C6009DCC99 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,6 +133,7 @@
 				FF267AF324739B0E002241C0 /* README.md */,
 				FF267AF52473A07E002241C0 /* LICENSE */,
 				FFE9E96D246EC7C6009DCC99 /* PhotoGIF */,
+				FFE941832D524BBD008D9718 /* PhotoGIFTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */,
+				FFE941822D524BBD008D9718 /* PhotoGIFTests.xctest */,
 			);
 			name = Products;
 			path = ..;
@@ -151,6 +175,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FFE941812D524BBD008D9718 /* PhotoGIFTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFE941882D524BBD008D9718 /* Build configuration list for PBXNativeTarget "PhotoGIFTests" */;
+			buildPhases = (
+				FFE9417E2D524BBD008D9718 /* Sources */,
+				FFE9417F2D524BBD008D9718 /* Frameworks */,
+				FFE941802D524BBD008D9718 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FFE941872D524BBD008D9718 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FFE941832D524BBD008D9718 /* PhotoGIFTests */,
+			);
+			name = PhotoGIFTests;
+			packageProductDependencies = (
+			);
+			productName = PhotoGIFTests;
+			productReference = FFE941822D524BBD008D9718 /* PhotoGIFTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FFE9E96A246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFE9E97E246EC7CA009DCC99 /* Build configuration list for PBXNativeTarget "PhotoGIF" */;
@@ -175,10 +222,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				ORGANIZATIONNAME = "Loyi Hsu";
 				TargetAttributes = {
+					FFE941812D524BBD008D9718 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = FFE9E96A246EC7C6009DCC99;
+					};
 					FFE9E96A246EC7C6009DCC99 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
@@ -200,11 +251,19 @@
 			projectRoot = "";
 			targets = (
 				FFE9E96A246EC7C6009DCC99 /* PhotoGIF */,
+				FFE941812D524BBD008D9718 /* PhotoGIFTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FFE941802D524BBD008D9718 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFE9E969246EC7C6009DCC99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +280,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FFE9417E2D524BBD008D9718 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFE9E967246EC7C6009DCC99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,11 +296,20 @@
 				FF8DC07F247076D400FCC99F /* Source.swift in Sources */,
 				FF80022A253C8834005FCBF7 /* ContentViewModel.swift in Sources */,
 				FF4F6D12247118D900CE308C /* AboutView.swift in Sources */,
+				FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */,
 				FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FFE941872D524BBD008D9718 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFE9E96A246EC7C6009DCC99 /* PhotoGIF */;
+			targetProxy = FFE941862D524BBD008D9718 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FF23F8D0253CA92E00977C39 /* Localizable.strings */ = {
@@ -260,6 +335,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FFE941892D524BBD008D9718 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2A59FUGCBE;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.PhotoGIFTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoGIF.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoGIF";
+			};
+			name = Debug;
+		};
+		FFE9418A2D524BBD008D9718 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2A59FUGCBE;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.PhotoGIFTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoGIF.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoGIF";
+			};
+			name = Release;
+		};
 		FFE9E97C246EC7CA009DCC99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,6 +560,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FFE941882D524BBD008D9718 /* Build configuration list for PBXNativeTarget "PhotoGIFTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFE941892D524BBD008D9718 /* Debug */,
+				FFE9418A2D524BBD008D9718 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FFE9E966246EC7C6009DCC99 /* Build configuration list for PBXProject "PhotoGIF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
