@@ -68,6 +68,13 @@ struct FileList: Equatable {
         self.sources.last == item
     }
 
+    func isValid() -> Bool {
+        let hasSources = !self.sources.isEmpty
+        let hasEmptyLengthSource = self.sources.contains(where: { $0.length.isEmpty == true })
+        let hasInvalidLengthSource = self.sources.contains { !$0.hasValidLength }
+        return hasSources && !hasEmptyLengthSource && !hasInvalidLengthSource
+    }
+
     // MARK: - Private Helpers
 
     private mutating func appendSource(_ item: URL) {
