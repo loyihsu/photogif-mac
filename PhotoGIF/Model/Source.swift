@@ -17,7 +17,7 @@ struct Source: Identifiable, Equatable {
     var id = UUID()
     var location: String
     var length: String
-    var displayName: String { self.location.lastElement().removingPercentEncoding ?? self.location.lastElement() }
+    var displayName: String { self.location.lastFileElement().removingPercentEncoding ?? self.location.lastFileElement() }
     var nsImage: NSImage
 
     var hasValidLength: Bool {

@@ -44,7 +44,7 @@ class ContentViewModel: ObservableObject {
     )[0]
     @Published private(set) var generateState: GenerateState? = nil
 
-    var displayOutputPath: String { self.outputPath.lastElement() }
+    var displayOutputPath: String { self.outputPath.lastFileElement() }
 
     var canGenerate: Bool {
         let hasSources = !self.sources.isEmpty
