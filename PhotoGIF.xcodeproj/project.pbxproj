@@ -15,8 +15,8 @@
 		FF80022A253C8834005FCBF7 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF800229253C8834005FCBF7 /* ContentViewModel.swift */; };
 		FF8DC07F247076D400FCC99F /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Source.swift */; };
 		FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417A2D5246F9008D9718 /* BundleData.swift */; };
-		FFE941992D525098008D9718 /* BundleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE941982D525096008D9718 /* BundleProxy.swift */; };
 		FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417C2D5249E3008D9718 /* Validator.swift */; };
+		FFE941992D525098008D9718 /* BundleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE941982D525096008D9718 /* BundleProxy.swift */; };
 		FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */; };
 		FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E970246EC7C6009DCC99 /* ContentView.swift */; };
 		FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E972246EC7CA009DCC99 /* Assets.xcassets */; };
@@ -138,10 +138,10 @@
 		FFE941792D5246F1008D9718 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9EB302D5262A000AAD41A /* GIFFactory.swift */,
-				FFE941982D525096008D9718 /* BundleProxy.swift */,
-				FFE9417C2D5249E3008D9718 /* Validator.swift */,
 				FFE9417A2D5246F9008D9718 /* BundleData.swift */,
+				FFE941982D525096008D9718 /* BundleProxy.swift */,
+				FFE9EB302D5262A000AAD41A /* GIFFactory.swift */,
+				FFE9417C2D5249E3008D9718 /* Validator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -149,8 +149,8 @@
 		FFE9E962246EC7C6009DCC99 = {
 			isa = PBXGroup;
 			children = (
-				FF267AF324739B0E002241C0 /* README.md */,
 				FF267AF52473A07E002241C0 /* LICENSE */,
+				FF267AF324739B0E002241C0 /* README.md */,
 				FFE9E96D246EC7C6009DCC99 /* PhotoGIF */,
 				FFE941832D524BBD008D9718 /* PhotoGIFTests */,
 			);
