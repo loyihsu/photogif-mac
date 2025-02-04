@@ -39,6 +39,8 @@ class ContentViewModel: ObservableObject {
     )[0]
     @Published private(set) var generateState: GenerateState? = nil
 
+    private let gifFactory: GIFFactory
+
     var displayOutputPath: String { self.outputPath.lastFileElement() }
 
     var canGenerate: Bool {
@@ -48,10 +50,13 @@ class ContentViewModel: ObservableObject {
         return hasSources && !hasEmptyLengthSource && !hasInvalidLengthSource && self.generateState != .loading
     }
 
-    init() {}
+    init(gifFactory: any GIFFactory = DefaultGIFFactory()) {
+        self.gifFactory = gifFactory
+    }
 
     /// Initialise with existing `[Source]`.
-    init(sources: [Source]) {
+    init(gifFactory: any GIFFactory = DefaultGIFFactory(), sources: [Source]) {
+        self.gifFactory = gifFactory
         self.sources = sources
     }
 
@@ -185,9 +190,10 @@ class ContentViewModel: ObservableObject {
         self.generateState = .loading
 
         DispatchQueue.global(qos: .userInteractive).async {
-            let isSuccess = self.sources.generateGIF(
+            let isSuccess = self.gifFactory.make(
+                with: self.sources,
                 path: self.outputPath,
-                filename: "/\(self.strippedFilename()).gif"
+                filename: self.filename
             )
 
             DispatchQueue.main.async {
@@ -202,38 +208,5 @@ class ContentViewModel: ObservableObject {
 
     private func strippedFilename() -> String {
         self.filename.components(separatedBy: ".gif").joined()
-    }
-}
-
-private extension [Source] {
-    /// Generate a GIF image, with delays specified with a list of Doubles.
-    /// - parameter path: The path to the output location.
-    /// - parameter filename: The filename for the output file.
-    /// - returns: Whether the operation succeeded.
-    func generateGIF(path: String, filename: String) -> Bool {
-        guard self.count > 0 else { return false }
-
-        let outputPath = path.appending(filename)
-        let outputUrl = URL(fileURLWithPath: outputPath) as CFURL
-
-        let imageProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]] as CFDictionary?
-
-        let gifProperties = self.map(\.length)
-            .map { [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: $0]] }
-
-        guard let destination = CGImageDestinationCreateWithURL(outputUrl, kUTTypeGIF, self.count, nil) else {
-            return false
-        }
-
-        CGImageDestinationSetProperties(destination, imageProperties)
-
-        for (index, image) in self.enumerated() {
-            let nsImage = image.nsImage
-            var rect = CGRect(x: 0, y: 0, width: nsImage.size.width, height: nsImage.size.height)
-            let image = nsImage.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
-            CGImageDestinationAddImage(destination, image, gifProperties[index] as CFDictionary?)
-        }
-
-        return CGImageDestinationFinalize(destination)
     }
 }

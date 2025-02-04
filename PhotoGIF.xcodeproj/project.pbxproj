@@ -22,6 +22,7 @@
 		FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E972246EC7CA009DCC99 /* Assets.xcassets */; };
 		FFE9E976246EC7CA009DCC99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E975246EC7CA009DCC99 /* Preview Assets.xcassets */; };
 		FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E977246EC7CA009DCC99 /* Main.storyboard */; };
+		FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9EB302D5262A000AAD41A /* GIFFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		FFE9E978246EC7CA009DCC99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFE9E97A246EC7CA009DCC99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoGIF.entitlements; sourceTree = "<group>"; };
+		FFE9EB302D5262A000AAD41A /* GIFFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -136,6 +138,7 @@
 		FFE941792D5246F1008D9718 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FFE9EB302D5262A000AAD41A /* GIFFactory.swift */,
 				FFE941982D525096008D9718 /* BundleProxy.swift */,
 				FFE9417C2D5249E3008D9718 /* Validator.swift */,
 				FFE9417A2D5246F9008D9718 /* BundleData.swift */,
@@ -313,6 +316,7 @@
 				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
 				FFE941992D525098008D9718 /* BundleProxy.swift in Sources */,
 				FF8DC07F247076D400FCC99F /* Source.swift in Sources */,
+				FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */,
 				FF80022A253C8834005FCBF7 /* ContentViewModel.swift in Sources */,
 				FF4F6D12247118D900CE308C /* AboutView.swift in Sources */,
 				FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */,
