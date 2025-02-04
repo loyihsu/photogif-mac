@@ -9,24 +9,23 @@
 import SwiftUI
 
 struct AboutView: View {
-    func getCFBundleString(for key: String) -> String {
-        let information = Bundle.main.infoDictionary?[key] as? String
-        return information ?? "Error"
-    }
-
     var body: some View {
         VStack {
             Image(nsImage: NSImage(named: "AppIcon")!)
                 .padding(.bottom)
-            Text("\(self.getCFBundleString(for: "CFBundleName"))")
+            Text("\(self.getBundleData(for: .appName))")
                 .font(.largeTitle)
                 .padding(8)
-            Text("Ver. \(self.getCFBundleString(for: "CFBundleShortVersionString")) (\(self.getCFBundleString(for: "CFBundleVersion")))")
+            Text("Ver. \(self.getBundleData(for: .versionString)) (\(self.getBundleData(for: .buildString)))")
                 .padding(.bottom, 20)
-            Text("\(self.getCFBundleString(for: "NSHumanReadableCopyright"))")
+            Text("\(self.getBundleData(for: .copyrightString))")
                 .font(.caption)
         }
         .frame(width: 450, height: 290, alignment: .center)
+    }
+
+    private func getBundleData(for key: BundleData) -> String {
+        return key.string() ?? ""
     }
 }
 
