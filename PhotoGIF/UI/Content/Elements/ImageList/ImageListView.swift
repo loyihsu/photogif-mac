@@ -15,10 +15,14 @@ struct ImageListView: View {
 
     var body: some View {
         VStack {
-            Button(LocalizedStringKey("import")) {
-                self.store.send(.importDocument)
+            HStack {
+                Spacer()
+                Button(LocalizedStringKey("import")) {
+                    self.store.send(.importDocument)
+                }
+                Spacer()
             }
-
+            
             ScrollView(.vertical) {
                 VStack(alignment: .center) {
                     Spacer()
