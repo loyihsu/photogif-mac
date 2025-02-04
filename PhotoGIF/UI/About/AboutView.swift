@@ -18,12 +18,12 @@ struct AboutView: View {
         VStack {
             Image(nsImage: NSImage(named: "AppIcon")!)
                 .padding(.bottom)
-            Text("\(getCFBundleString(for: "CFBundleName"))")
+            Text("\(self.getCFBundleString(for: "CFBundleName"))")
                 .font(.largeTitle)
                 .padding(8)
-            Text("Ver. \(getCFBundleString(for: "CFBundleShortVersionString")) (\(getCFBundleString(for:"CFBundleVersion")))")
+            Text("Ver. \(self.getCFBundleString(for: "CFBundleShortVersionString")) (\(self.getCFBundleString(for: "CFBundleVersion")))")
                 .padding(.bottom, 20)
-            Text("\(getCFBundleString(for: "NSHumanReadableCopyright"))")
+            Text("\(self.getCFBundleString(for: "NSHumanReadableCopyright"))")
                 .font(.caption)
         }
         .frame(width: 450, height: 290, alignment: .center)
