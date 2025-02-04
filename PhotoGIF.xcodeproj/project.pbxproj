@@ -16,6 +16,7 @@
 		FF8DC07F247076D400FCC99F /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Source.swift */; };
 		FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417A2D5246F9008D9718 /* BundleData.swift */; };
 		FFE941992D525098008D9718 /* BundleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE941982D525096008D9718 /* BundleProxy.swift */; };
+		FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417C2D5249E3008D9718 /* Validator.swift */; };
 		FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */; };
 		FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E970246EC7C6009DCC99 /* ContentView.swift */; };
 		FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E972246EC7CA009DCC99 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		FF800229253C8834005FCBF7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		FFE9417A2D5246F9008D9718 /* BundleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleData.swift; sourceTree = "<group>"; };
+		FFE9417C2D5249E3008D9718 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		FFE941822D524BBD008D9718 /* PhotoGIFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoGIFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE941982D525096008D9718 /* BundleProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleProxy.swift; sourceTree = "<group>"; };
 		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE941982D525096008D9718 /* BundleProxy.swift */,
+				FFE9417C2D5249E3008D9718 /* Validator.swift */,
 				FFE9417A2D5246F9008D9718 /* BundleData.swift */,
 			);
 			path = Helpers;
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */,
 				FF1C1F072D5221EA0011E5C3 /* StringExtensions.swift in Sources */,
 				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
 				FFE941992D525098008D9718 /* BundleProxy.swift in Sources */,

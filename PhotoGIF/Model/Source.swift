@@ -9,12 +9,7 @@
 import Cocoa
 
 /**
-  The `Source` data structure.
-  - parameter `id`: The unique id for each item.
-  - parameter `location`: The file location.
-  - parameter `length`: The time the screen should stay in the output gif file.
-  - parameter `displayName`: The name to display on screen.
-  - parameter `nsImage`: The `NSImage` object for the `Source` file.
+  The representation of imported images.
  */
 struct Source: Identifiable, Equatable {
     static let supportedTypes = ["jpeg", "jpg", "png", "ai", "bmp", "tif", "tiff", "heic", "psd"]
@@ -26,12 +21,11 @@ struct Source: Identifiable, Equatable {
     var nsImage: NSImage
 
     var hasValidLength: Bool {
-        self.validSeconds(self.length) && !self.length.isEmpty
-    }
-
-    /// Function to validate the seconds.
-    /// - parameter str: String to validate.
-    private func validSeconds(_ str: String) -> Bool {
-        return str.first != "." && str.last != "." && str.count(where: { $0 == "." }) <= 1
+        [
+            DecimalNumberOnlyValidator(),
+            ValidDecimalPointValidator(),
+            NonEmptyValidator(),
+        ]
+        .validate(self.length)
     }
 }
