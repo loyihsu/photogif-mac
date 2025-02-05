@@ -20,7 +20,7 @@ extension DependencyValues {
     }
 
     private enum PathOpenPanelKey: DependencyKey {
-        static let liveValue: (((String) -> Void) -> Void) = { completion in
+        static let liveValue: ((String) -> Void) -> Void = { completion in
             let panel = NSOpenPanel()
             panel.canChooseDirectories = true
             panel.canChooseFiles = false

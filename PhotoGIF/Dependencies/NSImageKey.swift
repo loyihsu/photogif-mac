@@ -20,7 +20,7 @@ extension DependencyValues {
     }
 
     private enum NSImageKey: DependencyKey {
-        static let liveValue: ((URL) -> NSImage?) = { url in
+        static let liveValue: (URL) -> NSImage? = { url in
             NSImage(contentsOf: url)
         }
     }
