@@ -15,10 +15,14 @@ import UniformTypeIdentifiers
 struct Source: Identifiable, Equatable {
     static let supportedTypes: [UTType] = [.jpeg, .png, .bmp, .tiff, .heic]
 
-    var id = UUID()
+    var id = DependencyHelper.shared.nextUuid()
     var location: String
     var length: String
-    var displayName: String { self.location.lastFileElement().removingPercentEncoding ?? self.location.lastFileElement() }
+    var displayName: String {
+        self.location.lastFileElement().removingPercentEncoding
+            ?? self.location.lastFileElement()
+    }
+
     var nsImage: NSImage
 
     var hasValidLength: Bool {

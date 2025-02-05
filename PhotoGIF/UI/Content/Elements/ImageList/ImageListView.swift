@@ -22,12 +22,12 @@ struct ImageListView: View {
                 }
                 Spacer()
             }
-            
+
             ScrollView(.vertical) {
                 VStack(alignment: .center) {
                     Spacer()
 
-                    ForEach(self.store.fileList.sources) { item in
+                    ForEach(self.store.sources) { item in
                         HStack {
                             Image(nsImage: item.nsImage)
                                 .resizable()
@@ -62,16 +62,16 @@ struct ImageListView: View {
                             Button("⬆") {
                                 self.store.send(.moveUp(item: item))
                             }
-                            .disabled(self.store.fileList.isFirstSource(item))
+                            .disabled(self.store.state.isFirstSource(item))
 
                             Button("⬇") {
                                 self.store.send(.moveDown(item: item))
                             }
-                            .disabled(self.store.fileList.isLastSource(item))
+                            .disabled(self.store.state.isLastSource(item))
                         }
                     }
 
-                    if !self.store.fileList.sources.isEmpty {
+                    if !self.store.sources.isEmpty {
                         Button(LocalizedStringKey("clear")) {
                             self.store.send(.removeAllSources)
                         }

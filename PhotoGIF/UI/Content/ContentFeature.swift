@@ -13,6 +13,7 @@ import Foundation
 @Reducer
 struct ContentFeature: Reducer {
     @Dependency(\.gifFactory) var gifFactory
+    @Dependency(\.continuousClock) var clock
 
     @ObservableState
     struct State: Equatable {
@@ -20,7 +21,7 @@ struct ContentFeature: Reducer {
         var controlState = ImageControlsFeature.State()
     }
 
-    enum Action {
+    enum Action: Equatable {
         case list(action: ImageListFeature.Action)
         case control(action: ImageControlsFeature.Action)
     }
@@ -39,14 +40,14 @@ struct ContentFeature: Reducer {
             case .list:
                 // Notify the control state of any changes to the file list
                 // so that it can verify the current file list’s validity.
-                state.controlState.isFilelistValid = state.listState.fileList.isValid()
+                state.controlState.isFilelistValid = state.listState.isValid
                 return .none
             case .control(.generate):
-                let elements = state.listState.fileList.sources.elements
+                let elements = state.listState.sources.elements
                 let outputPath = state.controlState.outputPath
                 let outputFilename = state.controlState.outputFilename.components(separatedBy: ".gif").joined() + ".gif"
 
-                state.controlState.generationState = .loading
+                state.controlState.generationState = GenerationState.loading
 
                 return .run { send in
                     let result = self.gifFactory.make(
@@ -63,7 +64,7 @@ struct ContentFeature: Reducer {
                         )
                     )
 
-                    try await Task.sleep(nanoseconds: UInt64(5 * 1_000_000_000))
+                    try await self.clock.sleep(for: .seconds(5))
 
                     await send(
                         ContentFeature.Action.control(

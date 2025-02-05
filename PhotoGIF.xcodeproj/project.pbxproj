@@ -17,6 +17,8 @@
 		FF3A8C632D52A0F40065CD80 /* ImageControlsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C622D52A0EF0065CD80 /* ImageControlsFeature.swift */; };
 		FF3A8C662D52A3190065CD80 /* ImageListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C652D52A3170065CD80 /* ImageListFeature.swift */; };
 		FF3A8C682D52A3580065CD80 /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C672D52A3550065CD80 /* ImageListView.swift */; };
+		FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */; };
+		FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C742D532D440065CD80 /* DependencyHelper.swift */; };
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
 		FF75A0E525669D57004FDD21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF800229253C8834005FCBF7 /* ContentFeature.swift */; };
@@ -32,7 +34,6 @@
 		FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9EB302D5262A000AAD41A /* GIFFactory.swift */; };
 		FFE9EB342D5277FF00AAD41A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FFE9EB332D5277FF00AAD41A /* ComposableArchitecture */; };
 		FFE9EB3E2D527A2300AAD41A /* DirectoryProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9EB3D2D527A1E00AAD41A /* DirectoryProxy.swift */; };
-		FFE9EB402D527CFB00AAD41A /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9EB3F2D527CFA00AAD41A /* FileList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		FF3A8C622D52A0EF0065CD80 /* ImageControlsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageControlsFeature.swift; sourceTree = "<group>"; };
 		FF3A8C652D52A3170065CD80 /* ImageListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListFeature.swift; sourceTree = "<group>"; };
 		FF3A8C672D52A3550065CD80 /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
+		FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageKey.swift; sourceTree = "<group>"; };
+		FF3A8C742D532D440065CD80 /* DependencyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyHelper.swift; sourceTree = "<group>"; };
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		FF7ABBAE256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FF7ABBAF256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -78,7 +81,6 @@
 		FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoGIF.entitlements; sourceTree = "<group>"; };
 		FFE9EB302D5262A000AAD41A /* GIFFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFFactory.swift; sourceTree = "<group>"; };
 		FFE9EB3D2D527A1E00AAD41A /* DirectoryProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryProxy.swift; sourceTree = "<group>"; };
-		FFE9EB3F2D527CFA00AAD41A /* FileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -133,6 +135,7 @@
 		FF3A8C492D5288840065CD80 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */,
 				FF3A8C4E2D5288BD0065CD80 /* PathOpenPanelKey.swift */,
 				FF3A8C4C2D5288A30065CD80 /* FileOpenPanelKey.swift */,
 				FF3A8C4A2D5288900065CD80 /* GifFactoryKey.swift */,
@@ -196,7 +199,7 @@
 		FFE941792D5246F1008D9718 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9EB3F2D527CFA00AAD41A /* FileList.swift */,
+				FF3A8C742D532D440065CD80 /* DependencyHelper.swift */,
 				FFE9417A2D5246F9008D9718 /* BundleData.swift */,
 				FFE941982D525096008D9718 /* BundleProxy.swift */,
 				FFE9EB3D2D527A1E00AAD41A /* DirectoryProxy.swift */,
@@ -375,7 +378,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */,
 				FF3A8C4D2D5288A40065CD80 /* FileOpenPanelKey.swift in Sources */,
+				FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */,
 				FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */,
 				FF1C1F072D5221EA0011E5C3 /* StringExtensions.swift in Sources */,
 				FF3A8C4B2D5288910065CD80 /* GifFactoryKey.swift in Sources */,
@@ -388,7 +393,6 @@
 				FF4F6D12247118D900CE308C /* AboutView.swift in Sources */,
 				FF3A8C632D52A0F40065CD80 /* ImageControlsFeature.swift in Sources */,
 				FFE9EB3E2D527A2300AAD41A /* DirectoryProxy.swift in Sources */,
-				FFE9EB402D527CFB00AAD41A /* FileList.swift in Sources */,
 				FF3A8C662D52A3190065CD80 /* ImageListFeature.swift in Sources */,
 				FF3A8C4F2D5288BE0065CD80 /* PathOpenPanelKey.swift in Sources */,
 				FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */,

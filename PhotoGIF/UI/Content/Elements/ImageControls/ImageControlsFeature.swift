@@ -41,7 +41,7 @@ struct ImageControlsFeature: Reducer {
         }
     }
 
-    enum Action: BindableAction {
+    enum Action: BindableAction, Equatable {
         case selectPath
         case pathSelected(string: String)
         case binding(BindingAction<State>)
