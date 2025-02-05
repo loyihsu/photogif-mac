@@ -20,7 +20,7 @@ extension DependencyValues {
     }
 
     private enum FileOpenPanelKey: DependencyKey {
-        static let liveValue: ((([URL]) -> Void) -> Void) = { completion in
+        static let liveValue: (([URL]) -> Void) -> Void = { completion in
             let panel = NSOpenPanel()
 
             panel.allowsMultipleSelection = true
