@@ -6,6 +6,7 @@
 //  Copyright © 2020 Loyi Hsu. All rights reserved.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 @main
@@ -16,10 +17,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var isAboutWindowAppeared = false
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView(
+            store: StoreOf<ContentFeature>(
+                initialState: ContentFeature.State(),
+                reducer: {
+                    ContentFeature()
+                }
+            )
+        )
 
-        // Create the window and set the content view.
         self.window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
             styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
@@ -34,9 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         self.window.makeKeyAndOrderFront(nil)
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
+    func applicationWillTerminate(_ aNotification: Notification) {}
 
     @IBAction func callCustomisedAboutView(_ caller: NSMenuItem) {
         if self.isAboutWindowAppeared {

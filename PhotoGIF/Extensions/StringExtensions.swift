@@ -10,14 +10,16 @@ import Foundation
 
 extension String {
     /// Get the last non-empty element of the string (for path).
-    func lastElement() -> String {
-        return self
+    func lastFileElement() -> String {
+        let fallback = "Image"
+
+        guard self.contains("/") else { return fallback }
+
+        let last = self
             .components(separatedBy: "/")
             .filter { $0.isEmpty == false }
             .last
-            ?? NSLocalizedString(
-                "image",
-                comment: "A fallback placeholder for images that we cannot find the last path element."
-            )
+
+        return last ?? fallback
     }
 }
