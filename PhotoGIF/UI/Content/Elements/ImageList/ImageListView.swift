@@ -54,8 +54,8 @@ struct ImageListView: View {
 
                             Text(
                                 Int(item.length) ?? 2 == 1
-                                ? self.localisation(.second)
-                                : self.localisation(.seconds)
+                                    ? self.localisation(.second)
+                                    : self.localisation(.seconds)
                             )
 
                             Button("✘") {

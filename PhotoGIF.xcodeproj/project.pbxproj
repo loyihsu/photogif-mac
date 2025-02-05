@@ -119,7 +119,7 @@
 			children = (
 				FF1C1F032D521F3B0011E5C3 /* About */,
 				FF4903FB26E88FAB00FEE2FD /* Content */,
-				FFE9E977246EC7CA009DCC99 /* Main.storyboard */,
+				FF3A8C892D5369F00065CD80 /* Storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -170,6 +170,22 @@
 				FF3A8C672D52A3550065CD80 /* ImageListView.swift */,
 			);
 			path = ImageList;
+			sourceTree = "<group>";
+		};
+		FF3A8C892D5369F00065CD80 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				FF3A8C8C2D5369FD0065CD80 /* Menubar */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		FF3A8C8C2D5369FD0065CD80 /* Menubar */ = {
+			isa = PBXGroup;
+			children = (
+				FFE9E977246EC7CA009DCC99 /* Main.storyboard */,
+			);
+			path = Menubar;
 			sourceTree = "<group>";
 		};
 		FF4903FA26E88E3200FEE2FD /* Model */ = {
