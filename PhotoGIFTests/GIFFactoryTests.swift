@@ -6,10 +6,10 @@
 //  Copyright © 2025 Loyi Hsu. All rights reserved.
 //
 
-import Testing
-import Dependencies
 import Cocoa
+import Dependencies
 @testable import PhotoGIF
+import Testing
 
 struct GIFFactoryTests {
     @Test func testGenerateImage() {

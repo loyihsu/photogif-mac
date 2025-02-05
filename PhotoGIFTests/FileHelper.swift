@@ -24,7 +24,7 @@ final class FileHelper {
     }
 
     func getBundleNsImage(named name: String, extension ext: String) -> NSImage? {
-        let fileContent = getBundleFile(named: name, extension: ext)
+        let fileContent = self.getBundleFile(named: name, extension: ext)
         return fileContent.flatMap { NSImage(data: $0) }
     }
 
