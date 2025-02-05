@@ -22,7 +22,7 @@ extension DependencyValues {
     enum LocalisationKey: String {
         case importImages = "import"
         case changeOutputPath = "change"
-        case outputFilename = "output"
+        case outputFilename = "filename"
         case generate
         case second
         case seconds
