@@ -21,7 +21,7 @@
 
 ## Requirements
 
-This app requires macOS v11.5 or above to run.
+This app requires macOS v14 or above to run.
 
 ## Contributions
 
