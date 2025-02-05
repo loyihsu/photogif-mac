@@ -10,6 +10,8 @@ import ComposableArchitecture
 import SwiftUI
 
 struct ImageControlsView: View {
+    @Dependency(\.localisation) var localisation
+
     @Bindable var store: StoreOf<ImageControlsFeature>
 
     var body: some View {
@@ -17,15 +19,15 @@ struct ImageControlsView: View {
             VStack {
                 HStack {
                     Text("🗂 \(self.store.displayOutputPath)")
-                    Button(LocalizedStringKey("change")) {
+                    Button(self.localisation(.changeOutputPath)) {
                         self.store.send(.selectPath)
                     }
                 }
 
                 HStack {
-                    Text(LocalizedStringKey("filename"))
+                    Text(self.localisation(.outputFilename))
                     TextField(
-                        LocalizedStringKey("filename"),
+                        self.localisation(.outputFilename),
                         text: self.$store.outputFilename
                     )
                     .frame(width: 135, height: 12, alignment: .center)
@@ -33,7 +35,7 @@ struct ImageControlsView: View {
             }
 
             HStack {
-                Button(LocalizedStringKey("generate")) {
+                Button(self.localisation(.generate)) {
                     self.store.send(.generate)
                 }
                 .disabled(!self.store.canGenerate)

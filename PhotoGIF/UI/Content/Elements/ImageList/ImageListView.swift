@@ -11,13 +11,15 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ImageListView: View {
+    @Dependency(\.localisation) var localisation
+
     var store: StoreOf<ImageListFeature>
 
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Button(LocalizedStringKey("import")) {
+                Button(self.localisation(.importImages)) {
                     self.store.send(.importDocument)
                 }
                 Spacer()
@@ -37,7 +39,7 @@ struct ImageListView: View {
                             Text(item.displayName)
 
                             TextField(
-                                LocalizedStringKey("seconds"),
+                                self.localisation(.seconds),
                                 text: Binding(
                                     get: { item.length },
                                     set: {
@@ -52,8 +54,8 @@ struct ImageListView: View {
 
                             Text(
                                 Int(item.length) ?? 2 == 1
-                                    ? LocalizedStringKey("second")
-                                    : LocalizedStringKey("seconds")
+                                ? self.localisation(.second)
+                                : self.localisation(.seconds)
                             )
 
                             Button("✘") {
@@ -72,7 +74,7 @@ struct ImageListView: View {
                     }
 
                     if !self.store.sources.isEmpty {
-                        Button(LocalizedStringKey("clear")) {
+                        Button(self.localisation(.clear)) {
                             self.store.send(.removeAllSources)
                         }
                     }

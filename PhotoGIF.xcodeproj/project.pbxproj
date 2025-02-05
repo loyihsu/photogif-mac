@@ -20,6 +20,7 @@
 		FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */; };
 		FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C742D532D440065CD80 /* DependencyHelper.swift */; };
 		FF3A8C7A2D5365BD0065CD80 /* BundleKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C792D5365BB0065CD80 /* BundleKey.swift */; };
+		FF3A8C7C2D5367C40065CD80 /* LocalisationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C7B2D5367C00065CD80 /* LocalisationKey.swift */; };
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
 		FF75A0E525669D57004FDD21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF800229253C8834005FCBF7 /* ContentFeature.swift */; };
@@ -62,6 +63,7 @@
 		FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageKey.swift; sourceTree = "<group>"; };
 		FF3A8C742D532D440065CD80 /* DependencyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyHelper.swift; sourceTree = "<group>"; };
 		FF3A8C792D5365BB0065CD80 /* BundleKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleKey.swift; sourceTree = "<group>"; };
+		FF3A8C7B2D5367C00065CD80 /* LocalisationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationKey.swift; sourceTree = "<group>"; };
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		FF7ABBAE256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FF7ABBAF256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -134,10 +136,11 @@
 			isa = PBXGroup;
 			children = (
 				FF3A8C792D5365BB0065CD80 /* BundleKey.swift */,
-				FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */,
-				FF3A8C4E2D5288BD0065CD80 /* PathOpenPanelKey.swift */,
 				FF3A8C4C2D5288A30065CD80 /* FileOpenPanelKey.swift */,
 				FF3A8C4A2D5288900065CD80 /* GifFactoryKey.swift */,
+				FF3A8C7B2D5367C00065CD80 /* LocalisationKey.swift */,
+				FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */,
+				FF3A8C4E2D5288BD0065CD80 /* PathOpenPanelKey.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -145,8 +148,8 @@
 		FF3A8C5E2D52A0D10065CD80 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				FF3A8C642D52A3100065CD80 /* ImageList */,
 				FF3A8C612D52A0DE0065CD80 /* ImageControls */,
+				FF3A8C642D52A3100065CD80 /* ImageList */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -229,10 +232,6 @@
 		FFE9E96D246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
-				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
-				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
 				FF3A8C492D5288840065CD80 /* Dependencies */,
 				FF1C1F052D5221E30011E5C3 /* Extensions */,
 				FFE941792D5246F1008D9718 /* Helpers */,
@@ -241,6 +240,10 @@
 				FFE9E974246EC7CA009DCC99 /* Preview Content */,
 				FFE9E96C246EC7C6009DCC99 /* Products */,
 				FF1C1F042D521F490011E5C3 /* UI */,
+				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
+				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
+				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
+				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 			);
 			path = PhotoGIF;
 			sourceTree = "<group>";
@@ -352,12 +355,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF75A0E525669D57004FDD21 /* README.md in Resources */,
-				FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */,
-				FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */,
-				FFE9E976246EC7CA009DCC99 /* Preview Assets.xcassets in Resources */,
 				FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */,
 				FF267AF62473A07E002241C0 /* LICENSE in Resources */,
+				FF23F8CE253CA92E00977C39 /* Localizable.strings in Resources */,
+				FFE9E979246EC7CA009DCC99 /* Main.storyboard in Resources */,
+				FFE9E976246EC7CA009DCC99 /* Preview Assets.xcassets in Resources */,
+				FF75A0E525669D57004FDD21 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,25 +378,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */,
-				FF3A8C4D2D5288A40065CD80 /* FileOpenPanelKey.swift in Sources */,
-				FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */,
-				FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */,
-				FF1C1F072D5221EA0011E5C3 /* StringExtensions.swift in Sources */,
-				FF3A8C4B2D5288910065CD80 /* GifFactoryKey.swift in Sources */,
-				FF3A8C602D52A0DB0065CD80 /* ImageControlsView.swift in Sources */,
-				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
-				FF3A8C7A2D5365BD0065CD80 /* BundleKey.swift in Sources */,
-				FF8DC07F247076D400FCC99F /* Source.swift in Sources */,
-				FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */,
-				FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */,
 				FF4F6D12247118D900CE308C /* AboutView.swift in Sources */,
-				FF3A8C632D52A0F40065CD80 /* ImageControlsFeature.swift in Sources */,
-				FFE9EB3E2D527A2300AAD41A /* DirectoryProxy.swift in Sources */,
-				FF3A8C662D52A3190065CD80 /* ImageListFeature.swift in Sources */,
-				FF3A8C4F2D5288BE0065CD80 /* PathOpenPanelKey.swift in Sources */,
-				FF3A8C682D52A3580065CD80 /* ImageListView.swift in Sources */,
 				FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */,
+				FF3A8C7A2D5365BD0065CD80 /* BundleKey.swift in Sources */,
+				FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */,
+				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
+				FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */,
+				FFE9EB3E2D527A2300AAD41A /* DirectoryProxy.swift in Sources */,
+				FF3A8C4D2D5288A40065CD80 /* FileOpenPanelKey.swift in Sources */,
+				FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */,
+				FF3A8C4B2D5288910065CD80 /* GifFactoryKey.swift in Sources */,
+				FF3A8C632D52A0F40065CD80 /* ImageControlsFeature.swift in Sources */,
+				FF3A8C602D52A0DB0065CD80 /* ImageControlsView.swift in Sources */,
+				FF3A8C662D52A3190065CD80 /* ImageListFeature.swift in Sources */,
+				FF3A8C682D52A3580065CD80 /* ImageListView.swift in Sources */,
+				FF3A8C7C2D5367C40065CD80 /* LocalisationKey.swift in Sources */,
+				FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */,
+				FF3A8C4F2D5288BE0065CD80 /* PathOpenPanelKey.swift in Sources */,
+				FF8DC07F247076D400FCC99F /* Source.swift in Sources */,
+				FF1C1F072D5221EA0011E5C3 /* StringExtensions.swift in Sources */,
+				FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +415,9 @@
 		FF23F8D0253CA92E00977C39 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FF23F8CF253CA92E00977C39 /* zh-Hant */,
 				FF23F8D2253CA93100977C39 /* en */,
 				FF7ABBAF256698A400E1F143 /* zh-Hans */,
+				FF23F8CF253CA92E00977C39 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -422,8 +426,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				FFE9E978246EC7CA009DCC99 /* Base */,
-				FF23F8CC253CA7F500977C39 /* zh-Hant */,
 				FF7ABBAE256698A400E1F143 /* zh-Hans */,
+				FF23F8CC253CA7F500977C39 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
