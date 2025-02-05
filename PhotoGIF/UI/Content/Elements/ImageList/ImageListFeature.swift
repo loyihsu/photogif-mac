@@ -19,21 +19,21 @@ struct ImageListFeature: Reducer {
         /// The image sources added by the user to create a GIF.
         var sources = IdentifiedArrayOf<Source>()
 
+        /// This serves as a flag to indicate whether the source list is valid.
         var isValid: Bool {
+            // The sources list should not be empty.
             let hasSources = !self.sources.isEmpty
-            let hasEmptyLengthSource = self.sources.contains(where: { $0.length.isEmpty == true })
+            // Every source should have a valid time duration.
             let hasInvalidLengthSource = self.sources.contains { !$0.hasValidLength }
-            return hasSources && !hasEmptyLengthSource && !hasInvalidLengthSource
+            return hasSources && !hasInvalidLengthSource
         }
 
-        /// Check whether the item is the first item in the `sources` array.
-        /// - parameter item: The item to be checked.
+        /// Check if the item is the first source.
         func isFirstSource(_ item: Source) -> Bool {
             self.sources.first == item
         }
 
-        /// Check whether the item is the last item in the `sources` array
-        /// - parameter item: The item to be checked.
+        /// Check if the item is the last item in the sources.
         func isLastSource(_ item: Source) -> Bool {
             self.sources.last == item
         }
@@ -61,7 +61,7 @@ struct ImageListFeature: Reducer {
             case let .filesSelected(urls: urls):
                 for url in urls {
                     guard let image = self.nsImage(url) else { continue }
-                    let path = url.absoluteString.components(separatedBy: "file://").joined()
+                    let path = url.absoluteString.replacingOccurrences(of: "file://", with: "")
                     state.sources.append(Source(location: path, length: "1", nsImage: image))
                 }
                 return .none

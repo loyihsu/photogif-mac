@@ -45,7 +45,8 @@ struct ContentFeature: Reducer {
             case .control(.generate):
                 let elements = state.listState.sources.elements
                 let outputPath = state.controlState.outputPath
-                let outputFilename = state.controlState.outputFilename.components(separatedBy: ".gif").joined() + ".gif"
+                // Stripping the `.gif` extension to avoid double extensions (`xxx.gif.gif`).
+                let outputFilename = state.controlState.outputFilename.replacingOccurrences(of: ".gif", with: "") + ".gif"
 
                 state.controlState.generationState = GenerationState.loading
 

@@ -30,6 +30,7 @@ struct ImageControlsFeature: Reducer {
         /// The current state (successful, failed, or loading) of the file generation process.
         var generationState: GenerationState? = nil
 
+        /// This is a signal transmitted from the parent to determine if file generation is possible.
         var isFilelistValid: Bool = false
 
         var displayOutputPath: String {
@@ -65,6 +66,7 @@ struct ImageControlsFeature: Reducer {
             case .binding:
                 return .none
             case .generate:
+                // Handled at the parent.
                 return .none
             }
         }

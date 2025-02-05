@@ -29,7 +29,7 @@ extension DependencyValues {
 
             guard result == .OK, let string = panel.url?.absoluteString else { return }
 
-            let path = string.components(separatedBy: "file://").joined()
+            let path = string.replacingOccurrences(of: "file://", with: "")
             completion(path.removingPercentEncoding ?? path)
         }
     }

@@ -9,9 +9,7 @@
 import Cocoa
 import UniformTypeIdentifiers
 
-/**
-  The representation of imported images.
- */
+/// The representation of imported images.
 struct Source: Identifiable, Equatable {
     static let supportedTypes: [UTType] = [.jpeg, .png, .bmp, .tiff, .heic]
 

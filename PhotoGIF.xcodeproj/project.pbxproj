@@ -188,6 +188,16 @@
 			path = Menubar;
 			sourceTree = "<group>";
 		};
+		FF3A8C992D536F3E0065CD80 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FFE9E974246EC7CA009DCC99 /* Preview Content */,
+				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
+				FF23F8D0253CA92E00977C39 /* Localizable.strings */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		FF4903FA26E88E3200FEE2FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,14 +214,6 @@
 				FFE9E970246EC7C6009DCC99 /* ContentView.swift */,
 			);
 			path = Content;
-			sourceTree = "<group>";
-		};
-		FF4903FC26E8918F00FEE2FD /* Localisations */ = {
-			isa = PBXGroup;
-			children = (
-				FF23F8D0253CA92E00977C39 /* Localizable.strings */,
-			);
-			path = Localisations;
 			sourceTree = "<group>";
 		};
 		FFE941792D5246F1008D9718 /* Helpers */ = {
@@ -248,16 +250,14 @@
 		FFE9E96D246EC7C6009DCC99 /* PhotoGIF */ = {
 			isa = PBXGroup;
 			children = (
+				FF3A8C992D536F3E0065CD80 /* Assets */,
 				FF3A8C492D5288840065CD80 /* Dependencies */,
 				FF1C1F052D5221E30011E5C3 /* Extensions */,
 				FFE941792D5246F1008D9718 /* Helpers */,
-				FF4903FC26E8918F00FEE2FD /* Localisations */,
 				FF4903FA26E88E3200FEE2FD /* Model */,
-				FFE9E974246EC7CA009DCC99 /* Preview Content */,
 				FFE9E96C246EC7C6009DCC99 /* Products */,
 				FF1C1F042D521F490011E5C3 /* UI */,
 				FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */,
-				FFE9E972246EC7CA009DCC99 /* Assets.xcassets */,
 				FFE9E97A246EC7CA009DCC99 /* Info.plist */,
 				FFE9E97B246EC7CA009DCC99 /* PhotoGIF.entitlements */,
 			);
@@ -626,9 +626,9 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25020401;
+				CURRENT_PROJECT_VERSION = 25020501;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = 2A59FUGCBE;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -638,7 +638,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.apps.photogif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -654,9 +654,9 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25020401;
+				CURRENT_PROJECT_VERSION = 25020501;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoGIF/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = 2A59FUGCBE;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -666,7 +666,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.loyi.apps.photogif;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
