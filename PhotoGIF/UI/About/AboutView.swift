@@ -6,26 +6,25 @@
 //  Copyright © 2020 Loyi Hsu. All rights reserved.
 //
 
+import Dependencies
 import SwiftUI
 
 struct AboutView: View {
+    @Dependency(\.bundle) var bundle
+
     var body: some View {
         VStack {
             Image(nsImage: NSImage(named: "AppIcon")!)
                 .padding(.bottom)
-            Text("\(self.getBundleData(for: .appName))")
+            Text("\(self.bundle(.appName))")
                 .font(.largeTitle)
                 .padding(8)
-            Text("Ver. \(self.getBundleData(for: .versionString)) (\(self.getBundleData(for: .buildString)))")
+            Text("Ver. \(self.bundle(.versionString)) (\(self.bundle(.buildString)))")
                 .padding(.bottom, 20)
-            Text("\(self.getBundleData(for: .copyrightString))")
+            Text("\(self.bundle(.copyrightString))")
                 .font(.caption)
         }
         .frame(width: 450, height: 290, alignment: .center)
-    }
-
-    private func getBundleData(for key: BundleData) -> String {
-        return key.string() ?? ""
     }
 }
 

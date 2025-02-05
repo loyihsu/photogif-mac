@@ -19,13 +19,12 @@
 		FF3A8C682D52A3580065CD80 /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C672D52A3550065CD80 /* ImageListView.swift */; };
 		FF3A8C732D532D2E0065CD80 /* NSImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */; };
 		FF3A8C752D532D450065CD80 /* DependencyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C742D532D440065CD80 /* DependencyHelper.swift */; };
+		FF3A8C7A2D5365BD0065CD80 /* BundleKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3A8C792D5365BB0065CD80 /* BundleKey.swift */; };
 		FF4F6D12247118D900CE308C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4F6D11247118D900CE308C /* AboutView.swift */; };
 		FF75A0E525669D57004FDD21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FF267AF324739B0E002241C0 /* README.md */; };
 		FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF800229253C8834005FCBF7 /* ContentFeature.swift */; };
 		FF8DC07F247076D400FCC99F /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8DC07E247076D400FCC99F /* Source.swift */; };
-		FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417A2D5246F9008D9718 /* BundleData.swift */; };
 		FFE9417D2D5249E4008D9718 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9417C2D5249E3008D9718 /* Validator.swift */; };
-		FFE941992D525098008D9718 /* BundleProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE941982D525096008D9718 /* BundleProxy.swift */; };
 		FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */; };
 		FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E970246EC7C6009DCC99 /* ContentView.swift */; };
 		FFE9E973246EC7CA009DCC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFE9E972246EC7CA009DCC99 /* Assets.xcassets */; };
@@ -62,15 +61,14 @@
 		FF3A8C672D52A3550065CD80 /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
 		FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageKey.swift; sourceTree = "<group>"; };
 		FF3A8C742D532D440065CD80 /* DependencyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyHelper.swift; sourceTree = "<group>"; };
+		FF3A8C792D5365BB0065CD80 /* BundleKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleKey.swift; sourceTree = "<group>"; };
 		FF4F6D11247118D900CE308C /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		FF7ABBAE256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FF7ABBAF256698A400E1F143 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FF800229253C8834005FCBF7 /* ContentFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFeature.swift; sourceTree = "<group>"; };
 		FF8DC07E247076D400FCC99F /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
-		FFE9417A2D5246F9008D9718 /* BundleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleData.swift; sourceTree = "<group>"; };
 		FFE9417C2D5249E3008D9718 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		FFE941822D524BBD008D9718 /* PhotoGIFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoGIFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFE941982D525096008D9718 /* BundleProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleProxy.swift; sourceTree = "<group>"; };
 		FFE9E96B246EC7C6009DCC99 /* PhotoGIF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoGIF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE9E96E246EC7C6009DCC99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFE9E970246EC7C6009DCC99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +133,7 @@
 		FF3A8C492D5288840065CD80 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				FF3A8C792D5365BB0065CD80 /* BundleKey.swift */,
 				FF3A8C722D532D2C0065CD80 /* NSImageKey.swift */,
 				FF3A8C4E2D5288BD0065CD80 /* PathOpenPanelKey.swift */,
 				FF3A8C4C2D5288A30065CD80 /* FileOpenPanelKey.swift */,
@@ -200,8 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				FF3A8C742D532D440065CD80 /* DependencyHelper.swift */,
-				FFE9417A2D5246F9008D9718 /* BundleData.swift */,
-				FFE941982D525096008D9718 /* BundleProxy.swift */,
 				FFE9EB3D2D527A1E00AAD41A /* DirectoryProxy.swift */,
 				FFE9EB302D5262A000AAD41A /* GIFFactory.swift */,
 				FFE9417C2D5249E3008D9718 /* Validator.swift */,
@@ -386,7 +383,7 @@
 				FF3A8C4B2D5288910065CD80 /* GifFactoryKey.swift in Sources */,
 				FF3A8C602D52A0DB0065CD80 /* ImageControlsView.swift in Sources */,
 				FFE9E971246EC7C6009DCC99 /* ContentView.swift in Sources */,
-				FFE941992D525098008D9718 /* BundleProxy.swift in Sources */,
+				FF3A8C7A2D5365BD0065CD80 /* BundleKey.swift in Sources */,
 				FF8DC07F247076D400FCC99F /* Source.swift in Sources */,
 				FFE9EB312D5262A500AAD41A /* GIFFactory.swift in Sources */,
 				FF80022A253C8834005FCBF7 /* ContentFeature.swift in Sources */,
@@ -395,7 +392,6 @@
 				FFE9EB3E2D527A2300AAD41A /* DirectoryProxy.swift in Sources */,
 				FF3A8C662D52A3190065CD80 /* ImageListFeature.swift in Sources */,
 				FF3A8C4F2D5288BE0065CD80 /* PathOpenPanelKey.swift in Sources */,
-				FFE9417B2D5246FA008D9718 /* BundleData.swift in Sources */,
 				FF3A8C682D52A3580065CD80 /* ImageListView.swift in Sources */,
 				FFE9E96F246EC7C6009DCC99 /* AppDelegate.swift in Sources */,
 			);
